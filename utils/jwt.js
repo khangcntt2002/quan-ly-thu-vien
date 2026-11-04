@@ -7,7 +7,7 @@ if (!secret || secret.length < 32 ||
 exports.signToken = (user) => jwt.sign(
   { id: user._id.toString() },
   secret,
-  { algorithm: 'HS256', expiresIn: '1200s' }
+  { algorithm: 'HS256', expiresIn: '1d' }
 );
 exports.verifyToken = (token) => jwt.verify(
   token, secret, { algorithms: ['HS256'] }

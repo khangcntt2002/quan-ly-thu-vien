@@ -1,9 +1,57 @@
 footer.site-footer.mt-5
-    .container.py-4.d-flex.flex-wrap.justify-content-between.align-items-center.gap-3
-        div
-            strong PHUCKHANG.SACH
-            p.mb-0.small Cửa hàng chuyên bán sách và cho thuê
-        div.d-flex.gap-3
-            a(href="/products") Sản phẩm
-            a(href="/cart") Giỏ hàng
-            a(href="/about") Giới thiệu
+  .container.py-5
+    .row.g-4
+      // === CỘT 1: THƯƠNG HIỆU & MÔ TẢ ===
+      .col-lg-4.col-md-6
+        h4.footer-brand PHUCKHANG.SÁCH
+        p.footer-desc 
+          | Cửa hàng chuyên cung cấp sách & dịch vụ cho thuê sách uy tín tại TP.HCM.
+          | Luôn cập nhật sách mới với giá tốt nhất!
+        .footer-social.d-flex.gap-3.mb-3
+          a(href="#", title="Facebook")
+            i.bi.bi-facebook
+        
+          a(href="#", title="Zalo")
+            i.bi.bi-chat-dots
+        
+      
+      // === CỘT 2: LIÊN KẾT NHANH ===
+      .col-lg-2.col-md-3
+        h5.footer-heading Dịch vụ
+        ul.footer-links.list-unstyled
+          li: a(href="/book") Tất cả sách
+          li: a(href="/book?category=Công nghệ") Sách công nghệ
+          li: a(href="/book?category=Kinh tế") Sách kinh tế
+          li: a(href="/about") Giới thiệu chúng tôi
+      
+      // === CỘT 3: HỖ TRỢ ===
+      .col-lg-2.col-md-3
+        h5.footer-heading Hỗ trợ
+        ul.footer-links.list-unstyled
+          li: a(href="/login") Đăng nhập
+          li: a(href="/register") Đăng ký
+          li: a(href="/muon-sach") Hướng dẫn mượn sách
+          
+      
+      // === CỘT 4: LIÊN HỆ ===
+      .col-lg-4
+        h5.footer-heading Liên hệ
+        ul.footer-contact.list-unstyled
+          li.d-flex.gap-2.mb-2
+            i.bi.bi-geo-alt.fill
+            span 274 Nguyễn Văn Lượng,Gò Vấp, TP.HCM
+          li.d-flex.gap-2.mb-2
+            i.bi.bi-telephone.fill
+            span Hotline: 085 3737 411
+          li.d-flex.gap-2.mb-2
+            i.bi.bi-envelope
+            span phuckhangduancntt@email.com
+          li.d-flex.gap-2
+            i.bi.bi-clock
+            span Thứ 2–CN: 8:00 – 21:00
+    
+    // === DÒNG BẢN QUYỀN ===
+    .footer-bottom.mt-4.pt-3.text-center
+      p.mb-0.small
+        | © 2026 PHUCKHANG.SÁCH. Tất cả quyền được bảo lưu. 
+        | Made with ❤️ cho Nhà Sách Phúc Khang
