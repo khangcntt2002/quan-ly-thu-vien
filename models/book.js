@@ -67,14 +67,9 @@ const bookSchema = new mongoose.Schema({
     imagePublicId: {
         type: String,
         default: ''
-    },
-
-    // Ngày tạo
-    createdAt: {
-        type: Date,
-        default: Date.now
     }
+}, {
+    timestamps: true // ✅ Tự tạo trường createdAt & updatedAt
 });
 
-// Collection name: books
 module.exports = mongoose.model('Book', bookSchema);

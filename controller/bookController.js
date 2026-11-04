@@ -1,4 +1,4 @@
-const Book = require("../models/Book");
+const Book = require("../models/book");
 // MỤC 6: Dùng service đã tạo ở mục 5 để upload và dọn ảnh.
 const { uploadImage, deleteImage } = require("../services/image.service");
 const categories = [
