@@ -1,0 +1,15 @@
+extends layout
+
+block content
+    .row.justify-content-center.py-5
+        .col-lg-7.text-center
+            p.display-4.fw-bold.text-primary 403
+            h1.h2 Không có quyền truy cập
+            p.text-secondary.my-3 Bạn cần tài khoản quản trị viên để mở trang này.
+            .d-flex.flex-wrap.justify-content-center.gap-2
+                a#forbidden-home.btn.btn-primary(href="/") Về trang chủ
+                if typeof user !== 'undefined' && user
+                    form(method="POST" action="/logout")
+                        button#forbidden-logout.btn.btn-outline-primary(type="submit") Đăng xuất để đổi tài khoản
+                else
+                    a#forbidden-login.btn.btn-outline-primary(href="/login?next=%2Fadmin") Đăng nhập

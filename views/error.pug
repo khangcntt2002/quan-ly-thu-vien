@@ -1,0 +1,9 @@
+extends layout
+block content
+    .text-center.py-5
+        - const errorStatus = typeof status !== 'undefined' && status ? status : null
+        if errorStatus
+            p.display-5.fw-bold= errorStatus
+        h1.h2= typeof title !== 'undefined' && title ? title : 'Không thể mở trang'
+        p.lead(role="alert")= typeof message !== 'undefined' && message ? message : 'Trang không tồn tại hoặc đã có lỗi xảy ra.'
+        a#error-home.btn.btn-primary(href="/") Về trang chủ

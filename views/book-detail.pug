@@ -1,0 +1,58 @@
+extends layout
+
+block style
+    // CSS đã thêm ở trên rồi
+
+block content
+    .book-detail-container
+        // Đường dẫn điều hướng
+        .breadcrumb
+            a(href="/") Trang chủ
+            span › 
+            a(href="/book") Sách
+            span › #{book.title}
+
+        // Khung chính
+        .book-detail-card
+            .book-detail-inner
+                // Bìa sách
+                .book-detail-cover
+                    img(src=book.cover || '/images/default-book.jpg', alt=book.title)
+
+                // Thông tin sách
+                .book-detail-info
+                    h1.book-detail-title= book.title
+
+                    dl.book-detail-meta
+                        dt Tác giả
+                        dd= book.author
+                        
+                        dt Thể loại
+                        dd= book.category
+                        
+                        dt Phiên bản
+                        dd= book.edition || 'Chưa cập nhật'
+                        
+                        dt Ngôn ngữ
+                        dd= book.language || 'Tiếng Việt'
+
+                    h3 Giới thiệu sách
+                    .book-detail-desc
+                        p= book.description || 'Đang cập nhật nội dung...'
+
+                    // Nút hành động
+                    .book-detail-actions
+                        if user
+                            // === Đã đăng nhập → hiện MƯỢN & TRẢ ===
+                            a.btn-muon-sach(href="/muon-sach/#{book._id}")
+                                i.bi.bi-book-plus.me-1
+                                | Mượn sách
+                            
+                            a.btn-tra-sach(href="/tra-sach/#{book._id}")
+                                i.bi.bi-arrow-return-left.me-1
+                                | Trả sách
+                        
+                        // Luôn hiện nút Danh sách
+                        a.btn-danh-sach(href="/book")
+                            i.bi.bi-arrow-left.me-1
+                            | Danh sách sách

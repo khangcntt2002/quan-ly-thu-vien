@@ -1,0 +1,18 @@
+extends layout
+block content
+  h1 Thông tin user
+  dl
+    dt ID
+    dd= user.id
+    dt Username
+    dd= user.username
+    dt Họ tên
+    dd= user.fullname
+    dt Email
+    dd= user.email
+  p
+    a(href='/user') Danh sách
+    |  · 
+    a(href='/user/' + user.id + '/edit') Sửa
+    |  · 
+    a(href='/user/' + user.id + '/delete') Xóa

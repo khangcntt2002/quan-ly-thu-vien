@@ -1,0 +1,22 @@
+extends layout
+block content
+    .login-container
+        h1 Đăng kí
+        form(action="/register" method="POST")
+            .form-group
+                label(for="username") Tên tài khoản
+                input#username(type="text" name="username" placeholder="Nhập tên tài khoản" required)
+            .form-group
+                label(for="fullname") Họ và tên
+                input#username(type="text" name="fullname" placeholder="Nhập họ và tên" required)
+            .form-group
+                label(for="password") Mật khẩu
+                input#password(type="password" name="password" placeholder="Nhập mật khẩu" required)
+            .form-group
+                label(for="Nhaplaipassword") Nhập lại mật khẩu
+                input#password(type="password" name="Nhaplaipassword" placeholder="Nhập lại mật khẩu" required)
+            .form-group
+                label(for="email") Email
+                input#password(type="text" name="email" placeholder="Email" required)
+            .form-group
+                button(type="submit") Đăng kí

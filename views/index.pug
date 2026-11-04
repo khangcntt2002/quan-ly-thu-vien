@@ -1,0 +1,93 @@
+
+extends layout
+
+block content
+    style.
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .library-home {
+            width: 100%;
+            min-height: 585px;
+            box-sizing: border-box;
+            padding: 57px 20px 55px;
+            text-align: center;
+            background: linear-gradient(
+                110deg,
+                #99512d 0%,
+                #ae602e 48%,
+                #d1873d 100%
+            );
+        }
+
+        .library-home-container {
+            max-width: 1035px;
+            margin: 0 auto;
+        }
+
+        .library-home-image {
+            width: 100%;
+            height: 337px;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            border-radius: 13px;
+        }
+
+        .library-home-title {
+            font-size: 32px;
+            font-weight: 400;
+            color: #211a17;
+            margin-top: 18px;
+            margin-bottom: 14px;
+            line-height: 1.4;
+        }
+
+        .library-home-subtitle {
+            color: #493020;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .library-home-description {
+            color: #513625;
+            font-size: 13px;
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .library-home {
+                padding: 35px 15px;
+                min-height: auto;
+            }
+
+            .library-home-image {
+                height: 230px;
+            }
+
+            .library-home-title {
+                font-size: 24px;
+            }
+
+            .library-home-subtitle {
+                font-size: 14px;
+            }
+        }
+
+    .library-home
+        .library-home-container
+            img.library-home-image(
+                src="/images/library-banner.jpg"
+                alt="Thư viện sách Phúc Khang"
+            )
+
+            h1.library-home-title
+                | Chào mừng bạn đến với Thư Viện PHÚC KHANG !
+
+            p.library-home-subtitle
+                | Cùng khám phá các loại sách mới và hay trên thị trường.
+
+            p.library-home-description
+                | Chúc bạn có những giờ học tập, đọc sách thật vui và tạo được nhiều sản phẩm thú vị!

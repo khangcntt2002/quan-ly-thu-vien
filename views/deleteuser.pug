@@ -1,0 +1,13 @@
+extends layout
+block content
+  h1 Xác nhận xóa user
+  p Bạn có chắc muốn xóa hồ sơ sau không
+  p
+    strong= user.username
+    |  — 
+    span= user.fullname
+  p Sách và phiếu mượn được giữ lại sau khi xóa user.
+  form(action='/user/' + user.id + '/delete' method='post')
+    button.btn.btn-danger(type='submit') Xác nhận xóa
+    |  
+    a(href='/user') Hủy và quay lại

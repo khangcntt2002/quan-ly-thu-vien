@@ -1,0 +1,302 @@
+[
+  {
+    "title": "JavaScript: The Definitive Guide",
+    "author": "David Flanagan",
+    "category": "JavaScript",
+    "menuCategory": "Công nghệ",
+    "edition": "Ấn bản thứ 7",
+    "description": "Tài liệu tham khảo đầy đủ và chi tiết nhất về JavaScript hiện đại.",
+    "url": "https://www.oreilly.com/library/view/javascript-the-definitive/9781491952023/",
+    "image": "https://covers.openlibrary.org/b/isbn/9781491952023-L.jpg"
+  },
+  {
+    "title": "Learning React",
+    "author": "Alex Banks & Eve Porcello",
+    "category": "React",
+    "menuCategory": "Công nghệ",
+    "edition": "Ấn bản thứ 2",
+    "description": "Xây dựng giao diện người dùng hiện đại với React và Hooks.",
+    "url": "https://www.oreilly.com/library/view/learning-react-2nd/9781492051462/",
+    "image": "https://covers.openlibrary.org/b/isbn/9781492051462-L.jpg"
+  },
+  {
+    "title": "Node.js Design Patterns",
+    "author": "Mario Casciaro & Luciano Mammino",
+    "category": "Node.js",
+    "menuCategory": "Công nghệ",
+    "edition": "Ấn bản thứ 3",
+    "description": "Viết mã có hiệu suất và dễ bảo trì với các mẫu thiết kế Node.js.",
+    "url": "https://www.packtpub.com/product/node-js-design-patterns-third-edition/9781839214110",
+    "image": "https://covers.openlibrary.org/b/isbn/9781839214110-L.jpg"
+  },
+  {
+    "title": "Introduction to Algorithms",
+    "author": "Thomas H. Cormen & các tác giả",
+    "category": "Thuật toán",
+    "menuCategory": "Công nghệ",
+    "edition": "Ấn bản thứ 4",
+    "description": "Sách giáo khoa kinh điển về các thuật toán và cấu trúc dữ liệu.",
+    "url": "https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/",
+    "image": "https://covers.openlibrary.org/b/isbn/9780262046305-L.jpg"
+  },
+  {
+    "title": "The Art of Unit Testing",
+    "author": "Roy Osherove",
+    "category": "Kiểm thử phần mềm",
+    "menuCategory": "Công nghệ",
+    "edition": "Ấn bản thứ 3",
+    "description": "Viết mã kiểm thử đáng tin cậy, dễ bảo trì và có ý nghĩa.",
+    "url": "https://www.manning.com/books/the-art-of-unit-testing-third-edition",
+    "image": "https://covers.openlibrary.org/b/isbn/9781617297045-L.jpg"
+  },
+  {
+    "title": "Refactoring: Improving the Design of Existing Code",
+    "author": "Martin Fowler",
+    "category": "Thiết kế mã nguồn",
+    "menuCategory": "Công nghệ",
+    "edition": "Ấn bản thứ 2",
+    "description": "Cách cải thiện cấu trúc mã nguồn mà không thay đổi hành vi bên ngoài.",
+    "url": "https://martinfowler.com/books/refactoring.html",
+    "image": "https://covers.openlibrary.org/b/isbn/9780134757599-L.jpg"
+  },
+  {
+    "title": "You Don't Know JS: ES6 & Beyond",
+    "author": "Kyle Simpson",
+    "category": "JavaScript",
+    "menuCategory": "Công nghệ",
+    "edition": "Bản 2016",
+    "description": "Khám phá các tính năng mới của ECMAScript 6 và các phiên bản sau.",
+    "url": "https://github.com/getify/You-Dont-Know-JS",
+    "image": "https://covers.openlibrary.org/b/isbn/9781491933695-L.jpg"
+  },
+  {
+    "title": "Python Crash Course",
+    "author": "Eric Matthes",
+    "category": "Python",
+    "menuCategory": "Công nghệ",
+    "edition": "Ấn bản thứ 2",
+    "description": "Học lập trình Python nhanh chóng qua dự án thực tế.",
+    "url": "https://nostarch.com/pythoncrashcourse2e",
+    "image": "https://covers.openlibrary.org/b/isbn/9781593276034-L.jpg"
+  },
+  {
+    "title": "The Pragmatic Thinking and Learning",
+    "author": "Andy Hunt",
+    "category": "Tư duy lập trình",
+    "menuCategory": "Công nghệ",
+    "edition": "Bản 2008",
+    "description": "Cách tư duy và học hiệu quả hơn trong nghề phát triển phần mềm.",
+    "url": "https://pragprog.com/titles/ahptl/pragmatic-thinking-and-learning/",
+    "image": "https://covers.openlibrary.org/b/isbn/9781934356050-L.jpg"
+  },
+  {
+    "title": "Domain-Driven Design",
+    "author": "Eric Evans",
+    "category": "Thiết kế hệ thống",
+    "menuCategory": "Công nghệ",
+    "edition": "Bản 2003",
+    "description": "Xử lý độ phức tạp trong thiết kế phần mềm bằng mô hình hóa miền nghiệp vụ.",
+    "url": "https://www.domainlanguage.com/books/",
+    "image": "https://covers.openlibrary.org/b/isbn/9780321125217-L.jpg"
+  },
+  {
+    "title": "1984",
+    "author": "George Orwell",
+    "category": "Văn học kinh điển",
+    "menuCategory": "Văn học",
+    "edition": "Bản phổ thông",
+    "description": "Cảnh báo về chế độ toàn quyền, giám sát và sự thật bị bóp méo.",
+    "url": "https://www.planetebook.com/free-ebooks/1984/",
+    "image": "https://covers.openlibrary.org/b/isbn/9780451524935-L.jpg"
+  },
+  {
+    "title": "Animal Farm",
+    "author": "George Orwell",
+    "category": "Văn học kinh điển",
+    "menuCategory": "Văn học",
+    "edition": "Bản phổ thông",
+    "description": "Câu chuyện ngụ ngôn về quyền lực và sự tha hóa của người lãnh đạo.",
+    "url": "https://www.gutenberg.org/ebooks/2000",
+    "image": "https://covers.openlibrary.org/b/isbn/9780451526342-L.jpg"
+  },
+  {
+    "title": "The Hobbit",
+    "author": "J.R.R. Tolkien",
+    "category": "Tiểu thuyết kỳ ảo",
+    "menuCategory": "Văn học",
+    "edition": "Bản kỷ niệm",
+    "description": "Cuộc phiêu lưu của Bilbo Baggins trong hành trình tìm kho báu.",
+    "url": "https://www.houghtonmifflinbooks.com/books/the-hobbit",
+    "image": "https://covers.openlibrary.org/b/isbn/9780547928227-L.jpg"
+  },
+  {
+    "title": "Fahrenheit 451",
+    "author": "Ray Bradbury",
+    "category": "Văn học kinh điển",
+    "menuCategory": "Văn học",
+    "edition": "Bản phổ thông",
+    "description": "Thế giới nơi sách bị đốt cháy và tư duy độc lập bị đàn áp.",
+    "url": "https://www.penguinrandomhouse.ca/books/159782/fahrenheit-451-by-ray-bradbury/9780451526748",
+    "image": "https://covers.openlibrary.org/b/isbn/9780451526748-L.jpg"
+  },
+  {
+    "title": "The Alchemist",
+    "author": "Paulo Coelho",
+    "category": "Tiểu thuyết truyền cảm",
+    "menuCategory": "Văn học",
+    "edition": "Bản tiếng Anh",
+    "description": "Hành trình tìm kiếm bản thân và theo đuổi ước mơ.",
+    "url": "https://paulocoelhoblog.com/the-alchemist/",
+    "image": "https://covers.openlibrary.org/b/isbn/9780061120084-L.jpg"
+  },
+  {
+    "title": "Crime and Punishment",
+    "author": "Fyodor Dostoevsky",
+    "category": "Văn học kinh điển",
+    "menuCategory": "Văn học",
+    "edition": "Bản dịch",
+    "description": "Tội lỗi, hối hận và sự thức tỉnh về đạo đức con người.",
+    "url": "https://www.gutenberg.org/ebooks/2554",
+    "image": "https://covers.openlibrary.org/b/isbn/9780486415871-L.jpg"
+  },
+  {
+    "title": "The Catcher in the Rye",
+    "author": "J.D. Salinger",
+    "category": "Văn học hiện đại",
+    "menuCategory": "Văn học",
+    "edition": "Bản phổ thông",
+    "description": "Nỗi cô đơn và khủng hoảng bản thân của thanh thiếu niên trong xã hội.",
+    "url": "https://www.penguinrandomhouse.com/books/166971/the-catcher-in-the-rye-by-j-d-salinger/9780316769488",
+    "image": "https://covers.openlibrary.org/b/isbn/9780316769488-L.jpg"
+  },
+  {
+    "title": "One Hundred Years of Solitude",
+    "author": "Gabriel García Márquez",
+    "category": "Văn học thế giới",
+    "menuCategory": "Văn học",
+    "edition": "Bản dịch",
+    "description": "Lịch sử bảy đời gia đình Buendía trong thế giới huyền ảo và thực tại.",
+    "url": "https://www.penguinrandomhouse.com/books/159781/one-hundred-years-of-solitude-by-gabriel-garcia-marquez/9780525635642",
+    "image": "https://covers.openlibrary.org/b/isbn/9780525635642-L.jpg"
+  },
+  {
+    "title": "Man's Search for Meaning",
+    "author": "Viktor E. Frankl",
+    "category": "Tâm lý học",
+    "menuCategory": "Kỹ năng sống",
+    "edition": "Bản mở rộng",
+    "description": "Tìm kiếm ý nghĩa cuộc sống ngay trong hoàn cảnh khắc nghiệt nhất.",
+    "url": "https://www.beacon.org/Man-s-Search-for-Meaning-P1158.aspx",
+    "image": "https://covers.openlibrary.org/b/isbn/9780807014295-L.jpg"
+  },
+  {
+    "title": "The 7 Habits of Highly Effective People",
+    "author": "Stephen R. Covey",
+    "category": "Phát triển bản thân",
+    "menuCategory": "Kỹ năng sống",
+    "edition": "Bản 30 năm",
+    "description": "Xây dựng nhân cách và thói quen để thành công bền vững.",
+    "url": "https://www.simonandschuster.com/books/The-7-Habits-of-Highly-Effective-People/Stephen-R-Covey/9781982137274",
+    "image": "https://covers.openlibrary.org/b/isbn/9781982137274-L.jpg"
+  },
+  {
+    "title": "Thinking, Fast and Slow",
+    "author": "Daniel Kahneman",
+    "category": "Tư duy ra quyết định",
+    "menuCategory": "Kỹ năng sống",
+    "edition": "Bản tiếng Anh",
+    "description": "Hai hệ thống tư duy chi phối cách ta nghĩ và ra quyết định.",
+    "url": "https://us.penguinrandomhouse.com/books/159780/thinking-fast-and-slow-by-daniel-kahneman/9780374533557",
+    "image": "https://covers.openlibrary.org/b/isbn/9780374533557-L.jpg"
+  },
+  {
+    "title": "Flow: The Psychology of Optimal Experience",
+    "author": "Mihaly Csikszentmihalyi",
+    "category": "Tâm lý học",
+    "menuCategory": "Kỹ năng sống",
+    "edition": "Bản tái bản",
+    "description": "Trạng thái đắm chìm và tận hưởng tối đa trong công việc và cuộc sống.",
+    "url": "https://www.harpercollins.com/products/flow-9780061339202",
+    "image": "https://covers.openlibrary.org/b/isbn/9780061339202-L.jpg"
+  },
+  {
+    "title": "The Richest Man in Babylon",
+    "author": "George S. Clason",
+    "category": "Tài chính cá nhân",
+    "menuCategory": "Kinh tế",
+    "edition": "Bản phổ thông",
+    "description": "Nguyên tắc quản lý tiền bạc đơn giản nhưng vĩnh cửu.",
+    "url": "https://www.penguinrandomhouse.com/books/294772/the-richest-man-in-babylon-by-george-s-clason/9780451531896",
+    "image": "https://covers.openlibrary.org/b/isbn/9780451531896-L.jpg"
+  },
+  {
+    "title": "Think and Grow Rich",
+    "author": "Napoleon Hill",
+    "category": "Tư duy thành công",
+    "menuCategory": "Kinh tế",
+    "edition": "Bản tái bản",
+    "description": "Nguyên tắc tư duy và hành động dẫn đến thành công và giàu có.",
+    "url": "https://www.penguinrandomhouse.com/books/159783/think-and-grow-rich-by-napoleon-hill/9780451528742",
+    "image": "https://covers.openlibrary.org/b/isbn/9780451528742-L.jpg"
+  },
+  {
+    "title": "The Intelligent Investor",
+    "author": "Benjamin Graham",
+    "category": "Đầu tư",
+    "menuCategory": "Kinh tế",
+    "edition": "Bản mở rộng",
+    "description": "Nguyên tắc đầu tư giá trị kinh điển trên thị trường tài chính.",
+    "url": "https://www.harpercollins.com/products/the-intelligent-investor-revised-edition-benjamin-graham?variant=30210576875554",
+    "image": "https://covers.openlibrary.org/b/isbn/9780060555665-L.jpg"
+  },
+  {
+    "title": "Educated",
+    "author": "Tara Westover",
+    "category": "Hồi ký",
+    "menuCategory": "Tiểu sử",
+    "edition": "Bản tiếng Anh",
+    "description": "Hành trình vượt lên hoàn cảnh và sức mạnh của tri thức.",
+    "url": "https://www.penguinrandomhouse.com/books/535407/educated-by-tara-westover/9780399590504",
+    "image": "https://covers.openlibrary.org/b/isbn/9780399590504-L.jpg"
+  },
+  {
+    "title": "Factfulness",
+    "author": "Hans Rosling",
+    "category": "Khoa học phổ thông",
+    "menuCategory": "Giáo trình",
+    "edition": "Bản tiếng Anh",
+    "description": "Nhìn nhận thế giới với dữ liệu thực tế thay vì định kiến bi quan.",
+    "url": "https://factfulnessbook.com/",
+    "image": "https://covers.openlibrary.org/b/isbn/9781250105334-L.jpg"
+  },
+  {
+    "title": "The Laws of Human Nature",
+    "author": "Robert Greene",
+    "category": "Tâm lý xã hội",
+    "menuCategory": "Kỹ năng sống",
+    "edition": "Bản tiếng Anh",
+    "description": "Hiểu động lực và hành vi của con người trong mọi hoàn cảnh.",
+    "url": "https://www.penguinrandomhouse.com/books/531334/the-laws-of-human-nature-by-robert-greene/9780735224322",
+    "image": "https://covers.openlibrary.org/b/isbn/9780735224322-L.jpg"
+  },
+  {
+    "title": "Atomic Habits",
+    "author": "James Clear",
+    "category": "Phát triển bản thân",
+    "menuCategory": "Kỹ năng sống",
+    "edition": "Bản tái bản",
+    "description": "Xây dựng thói quen tốt từng bước nhỏ, thay đổi lớn trong dài hạn.",
+    "url": "https://jamesclear.com/atomic-habits",
+    "image": "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
+  },
+  {
+    "title": "The Power of Habit",
+    "author": "Charles Duhigg",
+    "category": "Tâm lý học",
+    "menuCategory": "Kỹ năng sống",
+    "edition": "Bản tiếng Anh",
+    "description": "Cơ chế hình thành thói quen và cách thay đổi chúng ở cá nhân và tổ chức.",
+    "url": "https://charlesduhigg.com/the-power-of-habit/",
+    "image": "https://covers.openlibrary.org/b/isbn/9780812981605-L.jpg"
+  }
+]

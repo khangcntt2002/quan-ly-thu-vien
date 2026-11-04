@@ -1,0 +1,109 @@
+extends layout
+
+block content
+    - const formBook = typeof book !== 'undefined' && book ? book : {}
+    .books-page
+        nav.mb-4(aria-label="Đường dẫn")
+            ol.breadcrumb
+                li.breadcrumb-item
+                    a(href="/") Trang chủ
+                li.breadcrumb-item.active(aria-current="page") Thêm sách
+
+        header.books-intro
+            span.tag Quản lý tủ sách
+            h1 Thêm sách mới
+            p Điền thông tin sách và chọn ảnh bìa từ máy tính. Các trường có dấu * là bắt buộc.
+
+        .card.shadow-sm.mx-auto
+            .card-body.p-4.p-md-5
+                if success
+                    .alert.alert-success(role="status")
+                        i.bi.bi-check-circle.me-2(aria-hidden="true")
+                        | Đã thêm sách thành công.
+                //- MỤC 4, 7: Hiện thông báo do middleware hoặc controller gửi về.
+                if error
+                    .alert.alert-danger(role="alert")
+                        i.bi.bi-exclamation-triangle.me-2(aria-hidden="true")
+                        | #{error}
+
+                //- MỤC 1: multipart/form-data cho phép gửi cả ô chữ và file ảnh.
+                form#book-upload-form(action="/book/add" method="post" enctype="multipart/form-data")
+                    .row.g-3
+                        .col-12
+                            label.form-label(for="title") Tên sách *
+                            input#title.form-control(
+                                type="text"
+                                name="title"
+                                value=formBook.title || ""
+                                maxlength="200"
+                                autocomplete="off"
+                                required
+                            )
+                        .col-md-6
+                            label.form-label(for="author") Tác giả *
+                            input#author.form-control(
+                                type="text"
+                                name="author"
+                                value=formBook.author || ""
+                                maxlength="200"
+                                required
+                            )
+                        .col-md-6
+                            label.form-label(for="category") Thể loại
+                            input#category.form-control(
+                                type="text"
+                                name="category"
+                                value=formBook.category || ""
+                                maxlength="100"
+                                placeholder="Ví dụ: JavaScript"
+                            )
+                        .col-md-6
+                            label.form-label(for="edition") Phiên bản
+                            input#edition.form-control(
+                                type="text"
+                                name="edition"
+                                value=formBook.edition || ""
+                                maxlength="100"
+                                placeholder="Ví dụ: Ấn bản 2"
+                            )
+                        .col-12
+                            label.form-label(for="description") Mô tả
+                            textarea#description.form-control(
+                                name="description"
+                                rows="5"
+                                maxlength="5000"
+                                placeholder="Giới thiệu ngắn về nội dung sách"
+                            )= formBook.description || ""
+                        .col-12
+                            label.form-label(for="url") Đường dẫn sách
+                            input#url.form-control(
+                                type="url"
+                                name="url"
+                                value=formBook.url || ""
+                                maxlength="2048"
+                                placeholder="https://example.com/book"
+                            )
+                        .col-12
+                            label.form-label(for="cover") Ảnh bìa sách
+                            //- Tên cover phải khớp với upload.single('cover') ở mục 4.
+                            //- accept hỗ trợ chọn file; server vẫn kiểm tra ở mục 3 và 5.
+                            input#cover.form-control(
+                                type="file"
+                                name="cover"
+                                accept="image/jpeg,image/png,image/webp"
+                                aria-describedby="cover-help cover-reselect"
+                            )
+                            #cover-help.form-text Chọn một ảnh JPG, PNG hoặc WEBP, tối đa 2 MB. Có thể để trống nếu chưa có ảnh bìa.
+                            #cover-reselect.form-text Nếu gửi biểu mẫu bị lỗi, hãy chọn lại file ảnh trước khi gửi lần nữa.
+                            if formBook.image
+                                .mt-3
+                                    p.small.text-secondary.mb-2 Ảnh bìa hiện có
+                                    img.img-thumbnail(src=formBook.image alt='Bìa sách ' + (formBook.title || '') width="150" height="200")
+
+                    .d-flex.flex-column.flex-sm-row.justify-content-end.gap-2.mt-4
+                        a#book-upload-back.btn.btn-outline-secondary(href="/book")
+                            i.bi.bi-arrow-left(aria-hidden="true")
+                            | Quay lại
+                        button#book-upload-submit.btn.btn-primary(type="submit")
+                            i.bi.bi-plus-circle(aria-hidden="true")
+                            | Thêm sách
