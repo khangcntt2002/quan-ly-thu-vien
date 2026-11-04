@@ -1,5 +1,7 @@
 // === kết nối vs book.js  ===
-const Book = require("../models/book"); // book chữ thường — khớp tên file
+const path = require('path');
+const Book = require(path.join(__dirname, '../models/book'));
+
 
 // Import model Borrow để kiểm tra trạng thái mượn
 const Borrow = require("../models/borrow");
