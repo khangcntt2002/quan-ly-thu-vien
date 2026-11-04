@@ -17,7 +17,7 @@ block content
             .book-detail-inner
                 // Bìa sách
                 .book-detail-cover
-                    img(src=book.cover || '/images/default-book.jpg', alt=book.title)
+                    img(src=book.image || '/images/default-book.jpg', alt=book.title)
 
                 // Thông tin sách
                 .book-detail-info
@@ -33,8 +33,8 @@ block content
                         dt Phiên bản
                         dd= book.edition || 'Chưa cập nhật'
                         
-                        dt Ngôn ngữ
-                        dd= book.language || 'Tiếng Việt'
+                        dt Danh mục
+                        dd= book.menuCategory || 'Chưa phân loại'
 
                     h3 Giới thiệu sách
                     .book-detail-desc
@@ -43,15 +43,28 @@ block content
                     // Nút hành động
                     .book-detail-actions
                         if user
-                            // === Đã đăng nhập → hiện MƯỢN & TRẢ ===
-                            a.btn-muon-sach(href="/muon-sach/#{book._id}")
-                                i.bi.bi-book-plus.me-1
-                                | Mượn sách
-                            
-                            a.btn-tra-sach(href="/tra-sach/#{book._id}")
-                                i.bi.bi-arrow-return-left.me-1
-                                | Trả sách
-                        
+                            // === Đã đăng nhập → hiện form MƯỢN sách ===
+                            form(action="/borrow/book" method="post")
+                                input(type="hidden" name="bookId" value=book._id)
+                                .mb-2
+                                    label.form-label Hẹn trả trước:
+                                    input(type="date" name="dueDate" required)
+                                button(type="submit").btn-muon-sach
+                                    i.bi.bi-book-plus.me-1
+                                    | Mượn sách
+
+                            // Kiểm tra nếu đang mượn thì hiện nút TRẢ
+                            if isBorrowing
+                                form(action=`/borrow/${activeBorrowId}/return` method="post")
+                                    button(type="submit").btn-tra-sach
+                                        i.bi.bi-arrow-return-left.me-1
+                                        | Trả sách
+                        else
+                            // Chưa đăng nhập → mời đăng nhập
+                            p Vui lòng 
+                                a(href="/login") đăng nhập 
+                                | để mượn sách
+
                         // Luôn hiện nút Danh sách
                         a.btn-danh-sach(href="/book")
                             i.bi.bi-arrow-left.me-1

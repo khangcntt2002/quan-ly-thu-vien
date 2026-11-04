@@ -1,4 +1,9 @@
-const Book = require("../models/Book");
+// === kết nối vs book.js  ===
+const Book = require("../models/book"); // book chữ thường — khớp tên file
+
+// Import model Borrow để kiểm tra trạng thái mượn
+const Borrow = require("../models/borrow");
+
 // MỤC 6: Dùng service đã tạo ở mục 5 để upload và dọn ảnh.
 const { uploadImage, deleteImage } = require("../services/image.service");
 const categories = [
@@ -22,7 +27,7 @@ function readBookFields(body = {}) {
     "edition",
     "description",
     "url",
-];
+  ];
   const data = {};
 
   for (const field of fields) {
@@ -94,7 +99,8 @@ exports.getBookPage = async (req, res) => {
             activePage: "books",
             books,
             categories,
-            selectedCategory
+            selectedCategory,
+            user: req.user // Truyền thông tin người dùng ra giao diện
         });
 
     } catch (err) {
@@ -103,7 +109,7 @@ exports.getBookPage = async (req, res) => {
     }
 };
 
-// book/:id - trang chi tiết sách
+// book/:id - trang chi tiết sách — ĐÃ CẬP NHẬT kiểm tra trạng thái mượn
 exports.getBookDetailPage = async (req, res) => {
   try {
     const book = await Book.findById(req.params.id);
@@ -111,7 +117,31 @@ exports.getBookDetailPage = async (req, res) => {
     if (!book) {
       return res.status(404).render("error");
     }
-    res.render("book-detail", { title: book.title, activePage: "books", book });
+
+    // === KIỂM TRA NGƯỜI DÙNG CÓ ĐANG MƯỢN SÁCH NÀY KHÔNG ===
+    let isBorrowing = false;
+    let activeBorrowId = null;
+
+    if (req.user) {
+      const borrow = await Borrow.findOne({
+        user: req.user._id,
+        book: book._id,
+        status: "borrowing"
+      });
+      if (borrow) {
+        isBorrowing = true;
+        activeBorrowId = borrow._id;
+      }
+    }
+
+    res.render("book-detail", {
+      title: book.title,
+      activePage: "books",
+      book,
+      user: req.user,           // Truyền thông tin người dùng
+      isBorrowing,              // Đang mượn hay không
+      activeBorrowId           // ID bản ghi mượn để trả sách
+    });
   } catch (err) {
     // id sai định dạng ObjectId cũng coi như không tìm thấy
     if (err.name === "CastError") {
@@ -194,7 +224,7 @@ exports.searchBooks = async (req, res) => {
     const pattern = keyword.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     const regex = { $regex: pattern, $options: "i" };
     const books = await Book.find({ $or: [{ title: regex }, { author: regex }] });
-    res.render("books", { title: "Tìm sách", activePage: "books", books, q: keyword });
+    res.render("books", { title: "Tìm sách", activePage: "books", books, q: keyword, user: req.user });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
