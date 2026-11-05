@@ -777,12 +777,18 @@ body .team-avatar .member span {
 /* ===== TRANG CHỦ — THÊM MỚI ===== */
 
 /* Thanh tìm kiếm */
+/* Thanh tìm kiếm */
 .search-box {
     max-width: 600px;
     margin: 30px auto 0;
 }
+.search-form {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
 .search-input {
-    width: 100%;
+    flex: 1;
     padding: 14px 25px;
     border: none;
     border-radius: 50px;
@@ -791,21 +797,22 @@ body .team-avatar .member span {
     outline: none;
 }
 .search-btn {
-    margin-top: 12px;
-    padding: 12px 35px;
-    background: #211a17;
+    padding: 14px 30px;
+    background: #000000;
     color: white;
     border: none;
     border-radius: 50px;
     font-size: 16px;
     font-weight: 700;
     cursor: pointer;
+    white-space: nowrap;
     transition: all 0.3s ease;
 }
 .search-btn:hover {
-    background: #493020;
+    background: #333333;
     transform: scale(1.05);
 }
+
 
 /* Tính năng nổi bật */
 .features-section {
