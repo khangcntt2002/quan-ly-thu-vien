@@ -19,8 +19,8 @@ router.post('/logout', /* requireSameOrigin, */ c.logout);
 router.get('/admin', requireAuth, requireRole('admin'),
   (req, res) => {
     res.render('admin/index', {
-      title: 'Quản trị LinhKien.vn',
-      stats: { books: 12, orders: 5 },
+      title: 'Thư Viện Sách',
+      stats: { books: 54, orders: 5 },
       books: [
         { name: 'Lập trình Node.js', price: 120000 },
         { name: 'MongoDB cơ bản', price: 95000 }
