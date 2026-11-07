@@ -36,12 +36,15 @@ block content
                         dt Danh mục
                         dd= book.menuCategory || 'Chưa phân loại'
 
+<<<<<<< HEAD
                         dt Giá tham khảo
                         dd= (book.price || 0).toLocaleString('vi-VN') + ' ₫'
 
                         dt Phí mượn mỗi ngày
                         dd= (book.dailyRentalFee || 5000).toLocaleString('vi-VN') + ' ₫/ngày'
 
+=======
+>>>>>>> a217276ab276069c824ff82f497054eae34deaf0
                     h3 Giới thiệu sách
                     .book-detail-desc
                         p= book.description || 'Đang cập nhật nội dung...'
@@ -50,6 +53,7 @@ block content
                     .book-detail-actions
                         if user
                             // === Đã đăng nhập → hiện form MƯỢN sách ===
+<<<<<<< HEAD
                             if isBorrowing
                                 p.alert.alert-info Bạn đang mượn cuốn sách này.
                                 form(action=`/borrow/${activeBorrowId}/return` method="post" onsubmit="return confirm('Xác nhận bạn đã trả sách?')")
@@ -68,12 +72,30 @@ block content
                                     button(type="submit").btn-muon-sach
                                         i.bi.bi-book-plus.me-1
                                         | Mượn sách
+=======
+                            form(action="/borrow/book" method="post")
+                                input(type="hidden" name="bookId" value=book._id)
+                                .mb-2
+                                    label.form-label Hẹn trả trước:
+                                    input(type="date" name="dueDate" required)
+                                button(type="submit").btn-muon-sach
+                                    i.bi.bi-book-plus.me-1
+                                    | Mượn sách
+
+                            // Kiểm tra nếu đang mượn thì hiện nút TRẢ
+                            if isBorrowing
+                                form(action=`/borrow/${activeBorrowId}/return` method="post")
+                                    button(type="submit").btn-tra-sach
+                                        i.bi.bi-arrow-return-left.me-1
+                                        | Trả sách
+>>>>>>> a217276ab276069c824ff82f497054eae34deaf0
                         else
                             // Chưa đăng nhập → mời đăng nhập
                             p Vui lòng 
                                 a(href="/login") đăng nhập 
                                 | để mượn sách
 
+<<<<<<< HEAD
                         // Chức năng quản lý chỉ dành cho Admin
                         if user && user.role === 'admin'
                             .d-flex.flex-wrap.gap-2.mt-3
@@ -85,6 +107,8 @@ block content
                                         i.bi.bi-trash.me-1
                                         | Xóa sách
 
+=======
+>>>>>>> a217276ab276069c824ff82f497054eae34deaf0
                         // Luôn hiện nút Danh sách
                         a.btn-danh-sach(href="/book")
                             i.bi.bi-arrow-left.me-1

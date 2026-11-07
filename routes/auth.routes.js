@@ -15,4 +15,21 @@ router.post('/login', /* requireSameOrigin, */ c.login);
 // Tương tự logout
 router.post('/logout', /* requireSameOrigin, */ c.logout);
 
+<<<<<<< HEAD
+=======
+// Trang Admin giữ nguyên — cần đăng nhập mới vào được
+router.get('/admin', requireAuth, requireRole('admin'),
+  (req, res) => {
+    res.render('admin/index', {
+      title: 'Thư Viện Sách',
+      stats: { books: 54, orders: 5 },
+      books: [
+        { name: 'Lập trình Node.js', price: 120000 },
+        { name: 'MongoDB cơ bản', price: 95000 }
+      ]
+    });
+  }
+);
+
+>>>>>>> a217276ab276069c824ff82f497054eae34deaf0
 module.exports = router;

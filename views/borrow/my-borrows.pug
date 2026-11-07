@@ -1,6 +1,7 @@
 extends ../layout
 
 block content
+<<<<<<< HEAD
   .container.py-4
     h2.mb-2 Sách của tôi
     p.text-secondary Theo dõi sách đang mượn, lịch sử đã trả và phí mượn.
@@ -102,3 +103,33 @@ block content
                     td= borrow.returnDate ? new Date(borrow.returnDate).toLocaleDateString('vi-VN') : '—'
                     td
                       span.badge.bg-success Đã trả
+=======
+  h2 Sách tôi đã mượn
+  
+  if borrows.length === 0
+    p Chưa mượn cuốn sách nào.
+  else
+    table
+      thead
+        tr
+          th Tên sách
+          th Ngày mượn
+          th Hẹn trả
+          th Trạng thái
+          th Hành động
+      tbody
+        each borrow in borrows
+          tr
+            td= borrow.book.title
+            td= borrow.borrowDate.toLocaleDateString('vi-VN')
+            td= borrow.dueDate.toLocaleDateString('vi-VN')
+            td
+              if borrow.status === 'borrowing'
+                span.status--mượn Đang mượn
+              else
+                span.status--trả Đã trả
+            td
+              if borrow.status === 'borrowing'
+                form(action=`/borrow/${borrow._id}/return` method='post')
+                  button(type='submit') Trả sách
+>>>>>>> a217276ab276069c824ff82f497054eae34deaf0

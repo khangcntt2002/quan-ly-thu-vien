@@ -63,6 +63,7 @@ const bookSchema = new mongoose.Schema({
         default: '/images/avatar1.png'
     },
 
+<<<<<<< HEAD
     // Giá tham khảo của sách (VNĐ), Admin có thể cập nhật trong form thêm/sửa.
     price: {
         type: Number,
@@ -76,6 +77,8 @@ const bookSchema = new mongoose.Schema({
         default: 5000
     },
 
+=======
+>>>>>>> a217276ab276069c824ff82f497054eae34deaf0
     // Mã ảnh Cloudinary
     imagePublicId: {
         type: String,

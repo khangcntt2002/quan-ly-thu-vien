@@ -5,6 +5,7 @@ const Book = require('../models/book');
 exports.borrowBook = async (req, res) => {
   try {
     const { bookId, dueDate } = req.body;
+<<<<<<< HEAD
     const userId = req.user._id;
     const parsedDueDate = new Date(dueDate);
     if (!bookId || !dueDate || Number.isNaN(parsedDueDate.getTime()) || parsedDueDate < new Date(new Date().toDateString())) {
@@ -14,11 +15,18 @@ exports.borrowBook = async (req, res) => {
     if (!book) return res.status(404).send('Không tìm thấy sách.');
     const userActiveBorrow = await Borrow.findOne({ user: userId, book: bookId, status: { $in: ['borrowing', 'overdue'] } });
     if (userActiveBorrow) return res.redirect('/borrow/my');
+=======
+    const userId = req.user._id; // Giả sử bạn đã có middleware xác thực người dùng
+>>>>>>> a217276ab276069c824ff82f497054eae34deaf0
 
     // Kiểm tra sách có đang được mượn không
     const existingBorrow = await Borrow.findOne({
       book: bookId,
+<<<<<<< HEAD
       status: { $in: ['borrowing', 'overdue'] }
+=======
+      status: 'borrowing'
+>>>>>>> a217276ab276069c824ff82f497054eae34deaf0
     });
     if (existingBorrow) {
       return res.status(400).json({ message: 'Sách đang được mượn bởi người khác' });
@@ -28,8 +36,12 @@ exports.borrowBook = async (req, res) => {
     const borrow = new Borrow({
       user: userId,
       book: bookId,
+<<<<<<< HEAD
       dueDate: parsedDueDate,
       dailyRentalFee: Number(book.dailyRentalFee) || 5000
+=======
+      dueDate: dueDate
+>>>>>>> a217276ab276069c824ff82f497054eae34deaf0
     });
     await borrow.save();
 
@@ -46,6 +58,7 @@ exports.getMyBorrows = async (req, res) => {
     const borrows = await Borrow.find({ user: req.user._id })
       .populate('book')
       .sort({ borrowDate: -1 });
+<<<<<<< HEAD
     const now = new Date();
     for (const item of borrows) {
       if (item.status === 'borrowing' && item.dueDate < now) {
@@ -70,6 +83,12 @@ exports.getMyBorrows = async (req, res) => {
       activeBorrows,
       returnedBorrows,
       returnedSuccessfully: req.query.returned === '1'
+=======
+
+    res.render('borrow/my-borrows', {
+      title: 'Sách tôi đã mượn',
+      borrows
+>>>>>>> a217276ab276069c824ff82f497054eae34deaf0
     });
   } catch (err) {
     console.error('Lỗi xem danh sách mượn:', err);
@@ -77,6 +96,7 @@ exports.getMyBorrows = async (req, res) => {
   }
 };
 
+<<<<<<< HEAD
 // Trả sách: chỉ chủ lượt mượn đang hoạt động mới được xác nhận trả.
 exports.returnBook = async (req, res) => {
   try {
@@ -141,6 +161,30 @@ exports.returnBook = async (req, res) => {
       title: 'Không thể trả sách',
       message: 'Đã xảy ra lỗi khi trả sách. Vui lòng thử lại.'
     });
+=======
+// Trả sách
+exports.returnBook = async (req, res) => {
+  try {
+    const borrow = await Borrow.findOne({
+      _id: req.params.id,
+      user: req.user._id,
+      status: 'borrowing'
+    });
+
+    if (!borrow) {
+      return res.status(404).json({ message: 'Không tìm thấy bản ghi mượn' });
+    }
+
+    // Cập nhật thông tin trả sách
+    borrow.returnDate = Date.now();
+    borrow.status = 'returned';
+    await borrow.save();
+
+    res.redirect('/borrow/my');
+  } catch (err) {
+    console.error('Lỗi trả sách:', err);
+    res.status(500).json({ message: 'Không thể trả sách' });
+>>>>>>> a217276ab276069c824ff82f497054eae34deaf0
   }
 };
 

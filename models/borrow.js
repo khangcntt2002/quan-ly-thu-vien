@@ -23,10 +23,13 @@ const borrowSchema = new mongoose.Schema({
     type: Date,
     required: true
   },
+<<<<<<< HEAD
   // Đơn giá/ngày được chốt tại thời điểm mượn.
   dailyRentalFee: { type: Number, min: 0, default: 5000 },
   rentalDays: { type: Number, min: 0, default: 0 },
   totalRentalFee: { type: Number, min: 0, default: 0 },
+=======
+>>>>>>> a217276ab276069c824ff82f497054eae34deaf0
   // Ngày trả (nếu đã trả)
   returnDate: {
     type: Date,

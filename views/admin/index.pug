@@ -1,6 +1,7 @@
 extends ../layout
 
 block content
+<<<<<<< HEAD
     - const summary = stats || {}
     .py-3
         p.text-primary.fw-semibold.mb-2 KHU VỰC QUẢN TRỊ
@@ -49,3 +50,44 @@ block content
                                     a.btn.btn-sm.btn-outline-primary(href='/book/' + book._id + '/edit') Sửa
         else
             p.text-secondary Chưa có sách trong cơ sở dữ liệu.
+=======
+    - const account = typeof user !== 'undefined' && user ? user : null
+    - const summary = typeof stats !== 'undefined' && stats ? stats : {}
+    - const entries = typeof books !== 'undefined' && Array.isArray(books) ? books : []
+    .py-3.py-md-4
+        p.text-primary.fw-semibold.mb-2 Khu vực quản trị
+        h1.h2.mb-3 Quản lý thư viện
+        if account
+            p.text-secondary Xin chào quản trị viên #{account.name}.
+        p.text-secondary Trang admin giả định phục vụ bài thực hành phân quyền. Các số liệu và sách bên dưới là dữ liệu minh họa, chưa có chức năng thêm sửa xóa.
+        .row.g-3.my-3
+            .col-sm-6
+                .card.border-0.shadow-sm.rounded-4.h-100
+                    .card-body.p-4
+                        h2.h6.text-secondary Số sách minh họa
+                        p.h2.mb-0= typeof summary.books === 'number' ? summary.books : 'Chưa có dữ liệu'
+            .col-sm-6
+                .card.border-0.shadow-sm.rounded-4.h-100
+                    .card-body.p-4
+                        h2.h6.text-secondary Số đơn minh họa
+                        p.h2.mb-0= typeof summary.orders === 'number' ? summary.orders : 'Chưa có dữ liệu'
+        section.card.border-0.shadow-sm.rounded-4.mt-4(aria-labelledby="admin-books-heading")
+            .card-body.p-4
+                h2#admin-books-heading.h5.mb-3 Danh sách sách mẫu
+                if entries.length
+                    .table-responsive
+                        table.table.align-middle.mb-0
+                            caption Danh sách minh họa do route admin cung cấp.
+                            thead
+                                tr
+                                    th(scope="col") Tên sách
+                                    th.text-end(scope="col") Giá đồng
+                            tbody
+                                each book in entries
+                                    tr
+                                        td= book.name
+                                        td.text-end= typeof book.price === 'number' ? book.price.toLocaleString('vi-VN') : 'Chưa có giá'
+                else
+                    p.text-secondary.mb-0 Chưa có dữ liệu sách minh họa.
+        a#admin-home.btn.btn-outline-primary.mt-4(href="/") Về trang chủ
+>>>>>>> a217276ab276069c824ff82f497054eae34deaf0

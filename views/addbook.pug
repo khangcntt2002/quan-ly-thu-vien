@@ -11,7 +11,11 @@ block content
 
         header.books-intro
             span.tag Quản lý tủ sách
+<<<<<<< HEAD
             h1= isEdit ? 'Chỉnh sửa thông tin sách' : 'Thêm sách mới'
+=======
+            h1 Thêm sách mới
+>>>>>>> a217276ab276069c824ff82f497054eae34deaf0
             p Điền thông tin sách và chọn ảnh bìa từ máy tính. Các trường có dấu * là bắt buộc.
 
         .card.shadow-sm.mx-auto
@@ -27,7 +31,11 @@ block content
                         | #{error}
 
                 //- MỤC 1: multipart/form-data cho phép gửi cả ô chữ và file ảnh.
+<<<<<<< HEAD
                 form#book-upload-form(action=(isEdit ? '/book/' + book._id + '/update' : '/book/add') method="post" enctype="multipart/form-data")
+=======
+                form#book-upload-form(action="/book/add" method="post" enctype="multipart/form-data")
+>>>>>>> a217276ab276069c824ff82f497054eae34deaf0
                     .row.g-3
                         .col-12
                             label.form-label(for="title") Tên sách *
@@ -66,6 +74,7 @@ block content
                                 maxlength="100"
                                 placeholder="Ví dụ: Ấn bản 2"
                             )
+<<<<<<< HEAD
                         .col-md-6
                             label.form-label(for="price") Giá tham khảo (VNĐ) *
                             input#price.form-control(
@@ -88,6 +97,8 @@ block content
                                 required
                             )
                             .form-text Mức phí tham khảo mặc định 5.000 ₫/ngày; Admin có thể điều chỉnh.
+=======
+>>>>>>> a217276ab276069c824ff82f497054eae34deaf0
                         .col-12
                             label.form-label(for="description") Mô tả
                             textarea#description.form-control(
@@ -123,9 +134,18 @@ block content
                                     img.img-thumbnail(src=formBook.image alt='Bìa sách ' + (formBook.title || '') width="150" height="200")
 
                     .d-flex.flex-column.flex-sm-row.justify-content-end.gap-2.mt-4
+<<<<<<< HEAD
                         a#book-upload-back.btn.btn-outline-secondary(href=(isEdit ? '/book/' + book._id : '/book'))
                             i.bi.bi-arrow-left(aria-hidden="true")
                             | Quay lại
                         button#book-upload-submit.btn.btn-primary(type="submit")
                             i.bi(class=isEdit ? "bi-save" : "bi-plus-circle" aria-hidden="true")
                             | #{isEdit ? "Lưu thay đổi" : "Thêm sách"}
+=======
+                        a#book-upload-back.btn.btn-outline-secondary(href="/book")
+                            i.bi.bi-arrow-left(aria-hidden="true")
+                            | Quay lại
+                        button#book-upload-submit.btn.btn-primary(type="submit")
+                            i.bi.bi-plus-circle(aria-hidden="true")
+                            | Thêm sách
+>>>>>>> a217276ab276069c824ff82f497054eae34deaf0

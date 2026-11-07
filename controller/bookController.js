@@ -29,8 +29,11 @@ function readBookFields(body = {}) {
     "edition",
     "description",
     "url",
+<<<<<<< HEAD
     "price",
     "dailyRentalFee",
+=======
+>>>>>>> a217276ab276069c824ff82f497054eae34deaf0
   ];
   const data = {};
 
@@ -38,10 +41,13 @@ function readBookFields(body = {}) {
     // Chỉ nhận chuỗi; thiếu ô hoặc gửi sai kiểu thì dùng chuỗi rỗng.
     data[field] = typeof body[field] === "string" ? body[field].trim() : "";
   }
+<<<<<<< HEAD
   const parsedPrice = Number(body.price);
   data.price = Number.isFinite(parsedPrice) && parsedPrice >= 0 ? parsedPrice : 200000;
   const parsedDailyFee = Number(body.dailyRentalFee);
   data.dailyRentalFee = Number.isFinite(parsedDailyFee) && parsedDailyFee >= 0 ? parsedDailyFee : 5000;
+=======
+>>>>>>> a217276ab276069c824ff82f497054eae34deaf0
   return data;
 }
 
@@ -134,7 +140,11 @@ exports.getBookDetailPage = async (req, res) => {
       const borrow = await Borrow.findOne({
         user: req.user._id,
         book: book._id,
+<<<<<<< HEAD
         status: { $in: ["borrowing", "overdue"] }
+=======
+        status: "borrowing"
+>>>>>>> a217276ab276069c824ff82f497054eae34deaf0
       });
       if (borrow) {
         isBorrowing = true;
@@ -163,7 +173,11 @@ exports.getBookDetailPage = async (req, res) => {
 exports.AddBookPage = (_req, res) => {
   res.render("addbook", {
     title: "Thêm sách",
+<<<<<<< HEAD
     book: { price: 200000 },
+=======
+    book: {},
+>>>>>>> a217276ab276069c824ff82f497054eae34deaf0
     error: "",
   });
 };
