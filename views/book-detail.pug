@@ -1,0 +1,91 @@
+extends layout
+
+block style
+    // CSS đã thêm ở trên rồi
+
+block content
+    .book-detail-container
+        // Đường dẫn điều hướng
+        .breadcrumb
+            a(href="/") Trang chủ
+            span › 
+            a(href="/book") Sách
+            span › #{book.title}
+
+        // Khung chính
+        .book-detail-card
+            .book-detail-inner
+                // Bìa sách
+                .book-detail-cover
+                    img(src=book.image || '/images/default-book.jpg', alt=book.title)
+
+                // Thông tin sách
+                .book-detail-info
+                    h1.book-detail-title= book.title
+
+                    dl.book-detail-meta
+                        dt Tác giả
+                        dd= book.author
+                        
+                        dt Thể loại
+                        dd= book.category
+                        
+                        dt Phiên bản
+                        dd= book.edition || 'Chưa cập nhật'
+                        
+                        dt Danh mục
+                        dd= book.menuCategory || 'Chưa phân loại'
+
+                        dt Giá tham khảo
+                        dd= (book.price || 0).toLocaleString('vi-VN') + ' ₫'
+
+                        dt Phí mượn mỗi ngày
+                        dd= (book.dailyRentalFee || 5000).toLocaleString('vi-VN') + ' ₫/ngày'
+
+                    h3 Giới thiệu sách
+                    .book-detail-desc
+                        p= book.description || 'Đang cập nhật nội dung...'
+
+                    // Nút hành động
+                    .book-detail-actions
+                        if user
+                            // === Đã đăng nhập → hiện form MƯỢN sách ===
+                            if isBorrowing
+                                p.alert.alert-info Bạn đang mượn cuốn sách này.
+                                form(action=`/borrow/${activeBorrowId}/return` method="post" onsubmit="return confirm('Xác nhận bạn đã trả sách?')")
+                                    button(type="submit").btn-tra-sach
+                                        i.bi.bi-arrow-return-left.me-1
+                                        | Xác nhận trả sách
+                                a.btn.btn-outline-primary.mt-2(href="/borrow/my") Xem các sách đã mượn
+                            else
+                                form(action="/borrow/book" method="post")
+                                    input(type="hidden" name="bookId" value=book._id)
+                                    p.text-success.fw-semibold
+                                        | Phí mượn: #{(book.dailyRentalFee || 5000).toLocaleString('vi-VN')} ₫/ngày
+                                    .mb-2
+                                        label.form-label Hẹn trả trước:
+                                        input(type="date" name="dueDate" min=new Date().toISOString().slice(0,10) required)
+                                    button(type="submit").btn-muon-sach
+                                        i.bi.bi-book-plus.me-1
+                                        | Mượn sách
+                        else
+                            // Chưa đăng nhập → mời đăng nhập
+                            p Vui lòng 
+                                a(href="/login") đăng nhập 
+                                | để mượn sách
+
+                        // Chức năng quản lý chỉ dành cho Admin
+                        if user && user.role === 'admin'
+                            .d-flex.flex-wrap.gap-2.mt-3
+                                a.btn.btn-warning(href='/book/' + book._id + '/edit')
+                                    i.bi.bi-pencil-square.me-1
+                                    | Chỉnh sửa sách
+                                form(action='/book/' + book._id + '/delete' method='post' onsubmit="return confirm('Bạn có chắc chắn muốn xóa sách này không?')")
+                                    button.btn.btn-danger(type='submit')
+                                        i.bi.bi-trash.me-1
+                                        | Xóa sách
+
+                        // Luôn hiện nút Danh sách
+                        a.btn-danh-sach(href="/book")
+                            i.bi.bi-arrow-left.me-1
+                            | Danh sách sách

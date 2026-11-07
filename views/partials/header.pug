@@ -1,0 +1,60 @@
+- const viewer = (typeof user !== 'undefined' && user) || (typeof locals !== 'undefined' && locals.user) || null
+- const currentPage = typeof activePage !== 'undefined' ? activePage : ''
+
+header
+    nav.navbar.navbar-expand-lg.site-navbar(aria-label="Điều hướng chính")
+        .container
+            a.navbar-brand(href="/" aria-label="Phúc Khang Sách - Trang chủ")
+                img(src="/images/logo-pks.png" alt="Phúc Khang Sách" class="brand-logo-img")
+                span
+                    | Phúc Khang 
+                    span.brand-highlight Sách
+
+            button.navbar-toggler(
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#siteNavbar"
+                aria-controls="siteNavbar"
+                aria-expanded="false"
+                aria-label="Mở menu điều hướng"
+            )
+                span.navbar-toggler-icon
+
+            #siteNavbar.collapse.navbar-collapse
+                ul.navbar-nav.ms-auto.align-items-lg-center.gap-lg-1
+                    li.nav-item
+                        a#nav-books.nav-link(href="/book" class=currentPage === 'books' ? 'active' : '' aria-current=currentPage === 'books' ? 'page' : undefined)
+                            | Sách
+                    
+                    li.nav-item
+                        a.nav-link(href="/about")
+                            | Giới thiệu
+
+                    if viewer
+                    
+                        
+                        
+                        li.nav-item.ms-lg-2
+                            span.nav-link Xin chào, #{viewer.name}
+                        
+                        if viewer.role === 'admin'
+                            li.nav-item
+                                a#nav-admin.nav-link(href="/admin")
+                                    
+                                    | Quản trị
+                        
+                        li.nav-item.ms-lg-2
+                            form(method="POST" action="/logout")
+                                button#nav-logout.btn.btn-outline-primary.rounded-pill.px-3(type="submit") Đăng xuất
+                    else
+                        // === Đăng ký: nền rỗng, viền vàng ===
+                        li.nav-item
+                            a#nav-register.btn.btn-outline-light.rounded-pill.px-3(href="/register")
+                                
+                                | Đăng ký
+                        
+                        // === Đăng nhập: nền xanh lá ===
+                        li.nav-item.ms-lg-2
+                            a#nav-login.btn.btn-success.rounded-pill.px-3(href="/login")
+                                
+                                | Đăng nhập

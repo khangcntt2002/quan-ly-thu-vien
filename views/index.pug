@@ -1,0 +1,299 @@
+extends layout
+
+block style
+    style.
+        .home-page {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 8px 12px 28px;
+            color: #5d4037;
+        }
+        .home-hero {
+            position: relative;
+            overflow: hidden;
+            border-radius: 14px;
+            background: #f3e5d2;
+            box-shadow: 0 5px 18px rgba(91, 57, 29, .10);
+        }
+        .home-hero .carousel-item img {
+            display: block;
+            width: 100%;
+            height: clamp(170px, 25vw, 270px);
+            object-fit: cover;
+            object-position: center 48%;
+        }
+        .home-hero .carousel-control-prev,
+        .home-hero .carousel-control-next {
+            width: 9%;
+        }
+        .home-hero .carousel-indicators {
+            margin-bottom: 9px;
+        }
+        .home-hero .carousel-indicators [data-bs-target] {
+            width: 9px;
+            height: 9px;
+            border: 0;
+            border-radius: 50%;
+        }
+        .home-hero-caption {
+            margin: 7px 0 0;
+            text-align: center;
+            color: #8d6e63;
+            font-size: 11px;
+        }
+        .home-search {
+            width: min(430px, 100%);
+            margin: 16px auto 26px;
+            display: flex;
+            align-items: center;
+            padding: 5px 7px 5px 16px;
+            border: 1px solid #e7d6c3;
+            border-radius: 999px;
+            background: #fff;
+            box-shadow: 0 3px 12px rgba(93, 64, 55, .07);
+        }
+        .home-search input {
+            min-width: 0;
+            flex: 1;
+            border: 0;
+            outline: 0;
+            box-shadow: none !important;
+            font-size: 13px;
+            background: transparent;
+        }
+        .home-search button {
+            width: 34px;
+            height: 34px;
+            border: 0;
+            border-radius: 50%;
+            color: #fff;
+            background: #8b5a2b;
+        }
+        .home-section {
+            margin: 0 0 30px;
+        }
+        .home-section-title {
+            margin: 0 0 17px;
+            text-align: center;
+            font-size: clamp(18px, 2vw, 22px);
+            font-weight: 800;
+            color: #5d4037;
+        }
+        .home-benefits {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 12px;
+        }
+        .home-benefit {
+            min-height: 120px;
+            padding: 16px 12px;
+            text-align: center;
+            border-top: 3px solid #a67c52;
+            border-radius: 7px;
+            background: linear-gradient(180deg, #fff 0%, #fffaf3 100%);
+            box-shadow: 0 3px 12px rgba(93, 64, 55, .06);
+        }
+        .home-benefit-icon {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 24px;
+            line-height: 1;
+        }
+        .home-benefit h3 {
+            margin: 0 0 5px;
+            font-size: 13px;
+            font-weight: 800;
+            color: #704a28;
+        }
+        .home-benefit p {
+            margin: 0;
+            color: #8d7668;
+            font-size: 11px;
+            line-height: 1.55;
+        }
+        .home-books {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+        .home-book-card {
+            overflow: hidden;
+            text-align: center;
+            border-radius: 9px;
+            background: #fffaf3;
+            box-shadow: 0 4px 14px rgba(93, 64, 55, .09);
+            transition: transform .2s ease, box-shadow .2s ease;
+        }
+        .home-book-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(93, 64, 55, .14);
+        }
+        .home-book-image {
+            display: block;
+            width: 100%;
+            height: clamp(125px, 17vw, 190px);
+            object-fit: cover;
+            background: #eee2d2;
+        }
+        .home-book-info {
+            padding: 10px 10px 13px;
+        }
+        .home-book-info h3 {
+            min-height: 34px;
+            margin: 0 0 4px;
+            color: #5d4037;
+            font-size: 13px;
+            font-weight: 800;
+        }
+        .home-book-info p {
+            margin: 0 0 9px;
+            color: #967b69;
+            font-size: 11px;
+        }
+        .home-book-link {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 999px;
+            color: #fff !important;
+            background: #985b35;
+            font-size: 11px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+        .home-book-link:hover {
+            background: #704a28;
+        }
+        .home-empty {
+            grid-column: 1 / -1;
+            padding: 24px;
+            text-align: center;
+            border-radius: 10px;
+            background: #fffaf3;
+            color: #8d7668;
+        }
+        .home-cta {
+            padding: 25px 18px;
+            border-radius: 10px;
+            text-align: center;
+            color: #fff;
+            background: linear-gradient(110deg, #98512e, #d1873d);
+            box-shadow: 0 5px 15px rgba(139, 90, 43, .15);
+        }
+        .home-cta h2 {
+            margin: 0 0 7px;
+            font-size: clamp(17px, 2vw, 21px);
+            font-weight: 800;
+        }
+        .home-cta p {
+            margin: 0 0 14px;
+            font-size: 12px;
+            color: rgba(255,255,255,.9);
+        }
+        .home-cta-actions {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 9px;
+        }
+        .home-cta-actions a {
+            display: inline-block;
+            padding: 8px 15px;
+            border: 1px solid rgba(255,255,255,.9);
+            border-radius: 999px;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+        .home-cta-actions a.primary {
+            color: #704a28;
+            background: #fff;
+        }
+        @media (max-width: 640px) {
+            .home-page { padding: 2px 3px 20px; }
+            .home-benefits { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+            .home-benefit { min-height: 112px; padding: 13px 8px; }
+            .home-books { gap: 10px; }
+            .home-book-info { padding: 9px 7px 11px; }
+            .home-book-info h3 { font-size: 11px; }
+        }
+        @media (max-width: 360px) {
+            .home-books { grid-template-columns: 1fr; }
+        }
+
+block content
+    .home-page
+        .home-hero
+            #homeHeroCarousel.carousel.slide(data-bs-ride="carousel" data-bs-interval="4000" data-bs-pause="hover")
+                .carousel-indicators
+                    button.active(type="button" data-bs-target="#homeHeroCarousel" data-bs-slide-to="0" aria-current="true" aria-label="Ảnh 1")
+                    if featuredBooks && featuredBooks.filter(book => book.image).length
+                        each book, i in featuredBooks.filter(book => book.image).slice(0, 4)
+                            button(type="button" data-bs-target="#homeHeroCarousel" data-bs-slide-to=i + 1 aria-label=`Ảnh ${i + 2}`)
+                .carousel-inner
+                    .carousel-item.active
+                        img(src="/images/library-banner.jpg" alt="Không gian thư viện Nhà Sách Phúc Khang")
+                    if featuredBooks && featuredBooks.filter(book => book.image).length
+                        each book in featuredBooks.filter(book => book.image).slice(0, 4)
+                            .carousel-item
+                                img(src=book.image alt=`Sách nổi bật: ${book.title}`)
+                button.carousel-control-prev(type="button" data-bs-target="#homeHeroCarousel" data-bs-slide="prev" aria-label="Ảnh trước")
+                    span.carousel-control-prev-icon(aria-hidden="true")
+                button.carousel-control-next(type="button" data-bs-target="#homeHeroCarousel" data-bs-slide="next" aria-label="Ảnh tiếp theo")
+                    span.carousel-control-next-icon(aria-hidden="true")
+        p.home-hero-caption Không gian đọc sách thân thiện – nơi tri thức được sẻ chia mỗi ngày
+
+        form.home-search(action="/book/search" method="get" role="search")
+            input(type="search" name="q" placeholder="Tìm sách theo tên hoặc tác giả..." aria-label="Tìm sách")
+            button(type="submit" aria-label="Tìm kiếm") ⌕
+
+        section.home-section(aria-labelledby="home-benefits-title")
+            h2#home-benefits-title.home-section-title Tại sao chọn Thư viện Phúc Khang?
+            .home-benefits
+                article.home-benefit
+                    span.home-benefit-icon 📚
+                    h3 Kho sách đa dạng
+                    p Nhiều đầu sách thuộc nhiều lĩnh vực, phù hợp mọi nhu cầu.
+                article.home-benefit
+                    span.home-benefit-icon ⚡
+                    h3 Mượn sách dễ dàng
+                    p Thao tác nhanh chóng, theo dõi lượt mượn thuận tiện.
+                article.home-benefit
+                    span.home-benefit-icon ⭐
+                    h3 Chất lượng đáng tin cậy
+                    p Thông tin sách rõ ràng, nội dung được chọn lọc.
+                article.home-benefit
+                    span.home-benefit-icon 💬
+                    h3 Hỗ trợ tận tình
+                    p Luôn sẵn sàng hỗ trợ bạn trong quá trình sử dụng.
+
+        section.home-section(aria-labelledby="home-featured-title")
+            h2#home-featured-title.home-section-title Sách nổi bật
+            .home-books
+                if featuredBooks && featuredBooks.length
+                    each book in featuredBooks
+                        article.home-book-card
+                            a(href=`/book/${book._id}` aria-label=`Xem sách ${book.title}`)
+                                img.home-book-image(
+                                    src=book.image || "/images/library-banner.jpg"
+                                    alt=`Bìa sách ${book.title}`
+                                    loading="lazy"
+                                )
+                            .home-book-info
+                                h3= book.title
+                                p= book.author || "Nhà Sách Phúc Khang"
+                                a.home-book-link(href=`/book/${book._id}`) Xem chi tiết
+                else
+                    .home-empty
+                        p.mb-2 Hiện chưa có sách để giới thiệu.
+                        a.home-book-link(href="/book") Khám phá danh sách sách
+
+        section.home-cta
+            h2 Bắt đầu khám phá thế giới tri thức ngay hôm nay!
+            p Chọn một cuốn sách yêu thích và bắt đầu hành trình đọc của bạn.
+            .home-cta-actions
+                a.primary(href="/book") Xem tất cả sách
+                if user
+                    a(href="/borrow/my") Sách tôi đang mượn
+                else
+                    a(href="/login") Đăng nhập để mượn sách

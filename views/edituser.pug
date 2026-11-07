@@ -1,0 +1,27 @@
+extends layout
+block content
+  h1 Sửa user
+  if error
+    p.alert.alert-danger= error
+  form(action='/user/' + data.id + '/edit' method='post')
+    .mb-3
+      label.form-label(for='username') Username
+      input#username.form-control(
+        name='username' value=data.username
+        required minlength='3' maxlength='50'
+      )
+    .mb-3
+      label.form-label(for='fullname') Họ tên
+      input#fullname.form-control(
+        name='fullname' value=data.fullname
+        required maxlength='100'
+      )
+    .mb-3
+      label.form-label(for='email') Email
+      input#email.form-control(
+        type='email' name='email' value=data.email
+        required maxlength='150'
+      )
+    button.btn.btn-primary(type='submit') Lưu thay đổi
+    |  
+    a(href='/user/' + data.id) Hủy

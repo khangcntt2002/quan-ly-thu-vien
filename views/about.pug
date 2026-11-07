@@ -1,0 +1,154 @@
+extends layout
+
+block style
+    style.
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            background: linear-gradient(135deg, #f0f9f9 0%, #e6f2f2 100%);
+            min-height: 100vh;
+        }
+        .page-header {
+            text-align: center;
+            padding: 40px 20px 20px;
+        }
+        .page-header h1 {
+            margin: 0;
+            font-size: 38px;
+            color: #1a6b6b;
+            font-weight: 700;
+        }
+        .page-header p {
+            font-size: 18px;
+            color: #555;
+            margin-top: 10px;
+        }
+        .team-avatar {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        .member {
+            text-align: center;
+        }
+        .avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #fff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            margin-bottom: 12px;
+            background: #e0f0f0;
+        }
+        .member h3 {
+            margin: 0;
+            font-size: 20px;
+            color: #222;
+        }
+        .member span {
+            color: #666;
+            font-size: 15px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto 50px;
+            padding: 0 20px;
+        }
+        .card {
+            background: #fff;
+            padding: 30px;
+            margin-bottom: 25px;
+            border-radius: 16px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+        }
+        .card h2 {
+            color: #299696;
+            margin-top: 0;
+            font-size: 24px;
+            border-bottom: 2px solid #e0f0f0;
+            padding-bottom: 10px;
+        }
+        .card p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #444;
+            margin: 10px 0;
+        }
+        .card ul {
+            line-height: 2;
+            color: #444;
+            padding-left: 20px;
+        }
+        .card li strong {
+            color: #1a6b6b;
+        }
+        .footer-note {
+            text-align: center;
+            color: #777;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+block content
+    .page-header
+        h1 📚 Hệ Thống Quản Lý Thư Viện Sách
+        p Dự án phát triển ứng dụng Web — Đồ án môn học
+
+    .team-avatar
+        .member
+            img.avatar(src="/images/khang-avatar.png", alt="Nguyễn Minh Khang")
+            h3 Nguyễn Minh Khang
+            span Phát triển Backend & CSDL
+
+        .member
+            img.avatar(src="/images/phuc-avatar.png", alt="Võ Minh Phúc")
+            h3 Võ Minh Phúc
+            span Thiết kế Giao diện & Frontend
+
+    .container
+        .card
+            h2 🎯 Giới thiệu dự án
+            p
+                | Chào thầy/cô và các bạn! Chúng mình là nhóm sinh viên thực hiện dự án
+                strong "Hệ thống Quản lý Thư viện Sách"
+                | — một ứng dụng web được xây dựng với mục tiêu quản lý thông tin sách, người dùng và hoạt động mượn trả một cách khoa học, dễ sử dụng.
+            p
+                | Dự án được thực hiện trong khuôn khổ đồ án môn học, giúp củng cố kiến thức về lập trình Web, thiết kế cơ sở dữ liệu và làm việc nhóm.
+
+        .card
+            h2 💡 Chức năng chính
+            ul
+                li <strong>Quản lý sách:</strong> Thêm, sửa, xóa, tìm kiếm thông tin sách
+                li <strong>Quản lý người dùng:</strong> Đăng ký, đăng nhập, phân quyền thành viên
+                li <strong>Hoạt động mượn/trả:</strong> Theo dõi tình trạng mượn sách, lịch sử giao dịch
+                li <strong>Tìm kiếm & Thống kê:</strong> Tra cứu nhanh, hiển thị số liệu thư viện
+
+        .card
+            h2 🛠️ Công nghệ sử dụng
+            ul
+                li <strong>Backend:</strong> Node.js — Express.js
+                li <strong>Cơ sở dữ liệu:</strong> MongoDB
+                li <strong>Frontend:</strong> Pug (Template Engine), HTML, JavaScript
+                li <strong>Công cụ:</strong> VS Code, Postman, môi trường phát triển Node.js,..
+
+        .card
+            h2 📩 Thông tin liên hệ
+            p
+                | <strong>Nhóm thực hiện:</strong> Nguyễn Minh Khang — Võ Minh Phúc
+            p
+                | <strong>Lớp/Niên khóa:</strong> CL26CT3
+            p
+                | <strong>Email:</strong> minhkhang220602@gmail.com
+            p
+                | <strong>Trường:</strong> CAO ĐẲNG CÔNG NGHỆ THÔNG TIN TP HỒ CHÍ MINH (ITC)
+
+    .footer-note
+        p © 2026 — Dự án Quản lý Thư viện Sách | Nguyễn Minh Khang & Võ Minh Phúc
