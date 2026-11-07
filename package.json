@@ -8,12 +8,7 @@
   "main": "app.js",
   "scripts": {
     "start": "nodemon app.js",
-<<<<<<< HEAD
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "prices:backfill": "node scripts/backfill-book-prices.js"
-=======
     "test": "echo \"Error: no test specified\" && exit 1"
->>>>>>> a217276ab276069c824ff82f497054eae34deaf0
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
