@@ -1,0 +1,26 @@
+extends ../layout
+
+block content
+    - const values = typeof old !== 'undefined' && old ? old : {}
+    - const formError = typeof error !== 'undefined' ? error : null
+    - const destination = typeof nextPath !== 'undefined' && nextPath === '/admin' ? '/admin' : '/'
+    .row.justify-content-center.py-3.py-md-4
+        .col-md-8.col-lg-6
+            .card.border-0.shadow-sm.rounded-4
+                .card-body.p-4.p-md-5
+                    h1.h3.mb-2 Đăng nhập
+                    p.text-secondary.mb-4 Nhập email và mật khẩu của bạn.
+                    if formError
+                        #login-error.alert.alert-danger(role="alert")= formError
+                    form#login-form(method="POST" action="/login")
+                        input(type="hidden" name="next" value=destination)
+                        .mb-3
+                            label.form-label(for="login-email") Email
+                            input#login-email.form-control(type="email" name="email" value=values.email required autocomplete="username")
+                        .mb-4
+                            label.form-label(for="login-password") Mật khẩu
+                            input#login-password.form-control(type="password" name="password" required autocomplete="current-password")
+                        button#login-submit.btn.btn-primary.w-100(type="submit") Đăng nhập
+                    p.text-center.small.mt-4.mb-0
+                        | Chưa có tài khoản? 
+                        a#login-register(href="/register") Đăng ký

@@ -1,0 +1,51 @@
+extends ../layout
+
+block content
+    - const summary = stats || {}
+    .py-3
+        p.text-primary.fw-semibold.mb-2 KHU VỰC QUẢN TRỊ
+        h1.h2.mb-2 Bảng điều khiển Admin
+        p.text-secondary Xin chào #{user.name}. Đây là khu vực quản lý hệ thống thư viện.
+        .row.g-3.my-4
+            each item in [{label:'Tổng số sách',value:summary.books || 0,icon:'📚'},{label:'Tài khoản',value:summary.users || 0,icon:'👥'},{label:'Tổng lượt mượn',value:summary.borrows || 0,icon:'📝'},{label:'Đang mượn',value:summary.activeBorrows || 0,icon:'📖'}]
+                .col-6.col-lg-3
+                    .card.border-0.shadow-sm.rounded-4.h-100
+                        .card-body.p-3
+                            p.mb-2= item.icon + ' ' + item.label
+                            h2.h3.mb-0= item.value
+        h2.h5.mb-3 Chức năng quản trị
+        .row.g-3
+            .col-md-4
+                a.card.card-body.border-0.shadow-sm.rounded-4.text-decoration-none.h-100(href='/book/add')
+                    h3.h5 Thêm sách
+                    p.text-secondary.mb-0 Thêm sách mới vào thư viện.
+            .col-md-4
+                a.card.card-body.border-0.shadow-sm.rounded-4.text-decoration-none.h-100(href='/book')
+                    h3.h5 Quản lý sách
+                    p.text-secondary.mb-0 Xem, chỉnh sửa và xóa sách.
+            .col-md-4
+                a.card.card-body.border-0.shadow-sm.rounded-4.text-decoration-none.h-100(href='/admin/users')
+                    h3.h5 Quản lý tài khoản
+                    p.text-secondary.mb-0 Xem danh sách người dùng.
+            .col-md-4
+                a.card.card-body.border-0.shadow-sm.rounded-4.text-decoration-none.h-100(href='/borrow/all')
+                    h3.h5 Quản lý mượn/trả
+                    p.text-secondary.mb-0 Theo dõi các lượt mượn và trả sách.
+        h2.h5.mt-4.mb-3 Sách mới cập nhật
+        if books && books.length
+            .table-responsive
+                table.table.table-hover.align-middle
+                    thead
+                        tr
+                            th Tên sách
+                            th Tác giả
+                            th Thao tác
+                    tbody
+                        each book in books
+                            tr
+                                td= book.title
+                                td= book.author
+                                td
+                                    a.btn.btn-sm.btn-outline-primary(href='/book/' + book._id + '/edit') Sửa
+        else
+            p.text-secondary Chưa có sách trong cơ sở dữ liệu.

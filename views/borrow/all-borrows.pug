@@ -1,0 +1,27 @@
+extends ../layout
+
+block content
+  .container.py-4
+    h1.mb-4 Tất cả lượt mượn
+    if !borrows || borrows.length === 0
+      .alert.alert-info Chưa có lượt mượn sách nào.
+    else
+      .table-responsive
+        table.table.table-striped.align-middle
+          thead
+            tr
+              th Người mượn
+              th Sách
+              th Ngày mượn
+              th Hẹn trả
+              th Ngày trả
+              th Trạng thái
+          tbody
+            each item in borrows
+              tr
+                td= item.user ? (item.user.name || item.user.email) : 'Tài khoản không tồn tại'
+                td= item.book ? item.book.title : 'Sách không tồn tại'
+                td= item.borrowDate ? new Date(item.borrowDate).toLocaleDateString('vi-VN') : '-'
+                td= item.dueDate ? new Date(item.dueDate).toLocaleDateString('vi-VN') : '-'
+                td= item.returnDate ? new Date(item.returnDate).toLocaleDateString('vi-VN') : '-'
+                td= item.status

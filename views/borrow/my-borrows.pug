@@ -1,0 +1,104 @@
+extends ../layout
+
+block content
+  .container.py-4
+    h2.mb-2 Sách của tôi
+    p.text-secondary Theo dõi sách đang mượn, lịch sử đã trả và phí mượn.
+
+    if returnedSuccessfully
+      .alert.alert-success.alert-dismissible.fade.show(role="alert")
+        strong Trả sách thành công!
+        |  Trạng thái đã được cập nhật và phí mượn đã được chốt.
+        button.btn-close(type="button" data-bs-dismiss="alert" aria-label="Đóng")
+
+    - const activeList = typeof activeBorrows !== 'undefined' ? activeBorrows : (borrows || []).filter(item => ['borrowing', 'overdue'].includes(item.status))
+    - const returnedList = typeof returnedBorrows !== 'undefined' ? returnedBorrows : (borrows || []).filter(item => item.status === 'returned')
+
+    ul.nav.nav-tabs.mb-4(role="tablist")
+      li.nav-item(role="presentation")
+        a.nav-link.active(href="#currently-borrowed" data-bs-toggle="tab" role="tab" aria-selected="true")
+          | Sách đang mượn
+          span.badge.bg-primary.ms-2= activeList.length
+      li.nav-item(role="presentation")
+        a.nav-link(href="#borrowed-history" data-bs-toggle="tab" role="tab" aria-selected="false")
+          | Sách đã mượn
+          span.badge.bg-success.ms-2= returnedList.length
+
+    .tab-content
+      #currently-borrowed.tab-pane.fade.show.active(role="tabpanel")
+        h5.mb-3 Sách đang mượn
+        if activeList.length === 0
+          .alert.alert-info Bạn hiện không có sách nào đang mượn.
+          a.btn.btn-primary(href="/book") Khám phá sách
+        else
+          .alert.alert-info
+            | Phí được tính theo số ngày thực tế giữ sách (tối thiểu 1 ngày). Tổng phí sẽ được chốt khi bạn trả sách.
+          .table-responsive
+            table.table.table-striped.table-hover.align-middle
+              thead
+                tr
+                  th Tên sách
+                  th Phí/ngày
+                  th Số ngày
+                  th Thành tiền tạm tính
+                  th Ngày mượn
+                  th Hẹn trả
+                  th Trạng thái
+                  th Hành động
+              tbody
+                each borrow in activeList
+                  tr
+                    td
+                      if borrow.book
+                        a(href=`/book/${borrow.book._id}`)= borrow.book.title
+                      else
+                        | Sách đã bị xóa
+                    td= (borrow.dailyRentalFee || (borrow.book && borrow.book.dailyRentalFee) || 5000).toLocaleString('vi-VN') + ' ₫'
+                    td= borrow.calculatedRentalDays || 1
+                    td
+                      strong= (borrow.calculatedRentalFee || 0).toLocaleString('vi-VN') + ' ₫'
+                    td= borrow.borrowDate ? new Date(borrow.borrowDate).toLocaleDateString('vi-VN') : '—'
+                    td= borrow.dueDate ? new Date(borrow.dueDate).toLocaleDateString('vi-VN') : '—'
+                    td
+                      if borrow.status === 'overdue'
+                        span.badge.bg-warning.text-dark Quá hạn
+                      else
+                        span.badge.bg-primary Đang mượn
+                    td
+                      form(action=`/borrow/${borrow._id}/return` method='post' onsubmit="return confirm('Xác nhận trả sách? Hệ thống sẽ chốt phí theo số ngày thực tế.')")
+                        button.btn.btn-sm.btn-success(type='submit')
+                          i.bi.bi-arrow-return-left.me-1
+                          | Trả sách
+
+      #borrowed-history.tab-pane.fade(role="tabpanel")
+        h5.mb-3 Lịch sử sách đã mượn
+        if returnedList.length === 0
+          .alert.alert-secondary Bạn chưa có lịch sử trả sách.
+        else
+          .table-responsive
+            table.table.table-striped.table-hover.align-middle
+              thead
+                tr
+                  th Tên sách
+                  th Phí/ngày
+                  th Số ngày
+                  th Tổng phí
+                  th Ngày mượn
+                  th Ngày trả
+                  th Trạng thái
+              tbody
+                each borrow in returnedList
+                  tr
+                    td
+                      if borrow.book
+                        a(href=`/book/${borrow.book._id}`)= borrow.book.title
+                      else
+                        | Sách đã bị xóa
+                    td= (borrow.dailyRentalFee || (borrow.book && borrow.book.dailyRentalFee) || 5000).toLocaleString('vi-VN') + ' ₫'
+                    td= borrow.rentalDays || 1
+                    td
+                      strong= (borrow.totalRentalFee || 0).toLocaleString('vi-VN') + ' ₫'
+                    td= borrow.borrowDate ? new Date(borrow.borrowDate).toLocaleDateString('vi-VN') : '—'
+                    td= borrow.returnDate ? new Date(borrow.returnDate).toLocaleDateString('vi-VN') : '—'
+                    td
+                      span.badge.bg-success Đã trả

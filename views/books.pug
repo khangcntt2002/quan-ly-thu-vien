@@ -1,0 +1,191 @@
+
+extends layout
+
+include mixins/book-card
+
+block content
+    style.
+        .books-page {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 18px;
+        }
+
+        .books-intro {
+            background: linear-gradient(110deg, #99512d, #cf873f);
+            border-radius: 15px;
+            padding: 30px;
+            color: white;
+            margin-bottom: 28px;
+        }
+
+        .books-intro .tag {
+            display: inline-block;
+            background: rgba(255,255,255,.18);
+            padding: 7px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+
+        .books-intro h1 {
+            font-size: 30px;
+            margin: 15px 0 10px;
+        }
+
+        .books-intro p {
+            margin: 0;
+            color: #fff1df;
+        }
+
+        /* Bố cục danh mục và sách */
+        .books-layout {
+            display: grid;
+            grid-template-columns: 230px minmax(0, 1fr);
+            gap: 25px;
+            align-items: start;
+        }
+
+        /* Thanh danh mục bên trái */
+        .books-sidebar {
+            background: #fff;
+            border: 1px solid #e1d2bf;
+            border-radius: 8px;
+            overflow: hidden;
+            position: sticky;
+            top: 20px;
+        }
+
+        .books-sidebar-title {
+            background: #c96b0b;
+            color: white;
+            padding: 17px 15px;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .books-category {
+            display: block;
+            padding: 14px 15px;
+            color: #594331;
+            text-decoration: none;
+            border-bottom: 1px solid #e8e0d7;
+            font-size: 14px;
+            transition: .2s;
+        }
+
+        .books-category:hover,
+        .books-category.active {
+            background: #f7ead8;
+            color: #b45d1c;
+            padding-left: 21px;
+        }
+
+        /* Khu vực sách bên phải */
+        .books-main {
+            min-width: 0;
+        }
+
+        .books-section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .books-section-heading h2 {
+            font-size: 23px;
+            color: #674329;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .books-count {
+            color: #98734e;
+            font-size: 14px;
+        }
+
+        .books-source-note {
+            margin-top: 25px;
+            color: #8a7968;
+            font-size: 13px;
+        }
+
+        @media(max-width: 768px) {
+            .books-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .books-sidebar {
+                position: static;
+            }
+
+            .books-intro {
+                padding: 22px;
+            }
+
+            .books-intro h1 {
+                font-size: 24px;
+            }
+        }
+
+    .books-page
+        header.books-intro
+            span.tag Tủ sách lập trình
+            h1 Mỗi trang sách, một điều mới.
+            p Tài liệu đồng hành cùng bạn trên hành trình học lập trình và xây dựng ứng dụng web.
+
+        .books-layout
+
+            // DANH MỤC BÊN TRÁI
+            aside.books-sidebar
+                .books-sidebar-title
+                    | DANH MỤC SÁCH
+
+                a.books-category.active(href="/book")
+                    | Tất cả sách
+
+                a.books-category(href="/book?category=Văn học")
+                    | Văn học
+
+                a.books-category(href="/book?category=Kinh tế")
+                    | Kinh tế
+
+                a.books-category(href="/book?category=Công nghệ")
+                    | Công nghệ
+
+                a.books-category(href="/book?category=Ngoại ngữ")
+                    | Ngoại ngữ
+
+                a.books-category(href="/book?category=Giáo trình")
+                    | Giáo trình
+
+                a.books-category(href="/book?category=Kỹ năng sống")
+                    | Kỹ năng sống
+
+                a.books-category(href="/book?category=Lịch sử")
+                    | Lịch sử
+
+                a.books-category(href="/book?category=Thiếu nhi")
+                    | Thiếu nhi
+
+            // DANH SÁCH SÁCH BÊN PHẢI
+            main.books-main
+                section(aria-labelledby="books-heading")
+                    .books-section-heading
+                        h2#books-heading Danh sách sách
+                        span.books-count #{books.length} cuốn sách
+
+                    if books.length
+                        .books-grid
+                            each book, index in books
+                                +bookCard(book, index)
+                    else
+                        .empty
+                            h3 Chưa có sách
+                            p.mb-0 Danh sách sách sẽ được cập nhật sớm.
+
+                    p.books-source-note
+                        | Ảnh bìa và nội dung sách thuộc tác giả, nhà xuất bản.
+                        | Chọn “Xem chi tiết” để tìm hiểu thêm về từng sách.

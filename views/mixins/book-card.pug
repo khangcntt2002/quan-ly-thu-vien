@@ -1,0 +1,26 @@
+mixin bookCard(book, index = 0)
+    article.book-card(aria-labelledby='book-title-' + book._id)
+        .book-cover
+            img(
+                src=book.image || '/images/avatar1.png'
+                alt='Bìa sách ' + book.title
+                width="240"
+                height="320"
+                loading=index < 2 ? 'eager' : 'lazy'
+                decoding="async"
+                onerror="this.onerror=null; this.src='/images/avatar1.png'"
+            )
+        .book-body
+            .book-meta
+                span.tag= book.category
+                span= book.edition
+            h3.book-title(id='book-title-' + book._id)= book.title
+            p.book-author= book.author
+            p.book-description= book.description
+            a.book-link(
+                id='book-link-' + book._id
+                href='/book/' + encodeURIComponent(book._id)
+                aria-label='Xem chi tiết sách ' + book.title
+            )
+                | Xem chi tiết
+                i.bi.bi-arrow-right(aria-hidden="true")

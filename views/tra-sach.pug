@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  .container.py-4
+    .row.justify-content-center
+      .col-lg-9
+        h1.mb-3 Hướng dẫn trả sách
+        p.text-secondary Bạn có thể theo dõi và trả những cuốn sách đang mượn trong tài khoản.
+        .card.shadow-sm
+          .card-body.p-4
+            ol.mb-0
+              li.mb-3 Đăng nhập bằng tài khoản đã dùng để mượn sách.
+              li.mb-3 Mở mục Sách tôi đã mượn.
+              li.mb-3 Tìm cuốn sách có trạng thái Đang mượn.
+              li.mb-3 Nhấn nút Trả sách.
+              li.mb-3 Kiểm tra trạng thái đã chuyển thành Đã trả.
+            .alert.alert-info.mt-4.mb-0 Nếu không thấy sách trong danh sách, hãy kiểm tra bạn đang đăng nhập đúng tài khoản.
+        .mt-3
+          a.btn.btn-primary(href='/borrow/my') Xem sách tôi đã mượn

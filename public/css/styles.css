@@ -1,0 +1,777 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+/* ===== 1. Biến chung & Design Tokens — NÂU GỖ VÀNG ===== */
+:root {
+    --brand: #2563eb;
+    --brand-dark: #1d4ed8;
+    --brand-light: #3b82f6;
+    --brand-soft: #eff6ff;
+    --brand-gradient: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+    
+    /* Màu THANH ĐIỀU HƯỚNG — NÂU GỖ VÀNG */
+    --navbar-bg: rgba(173, 134, 82, 0.95);
+    --navbar-border: rgba(255, 243, 224, 0.25);
+    --navbar-text: #FFD700;
+    --navbar-text-hover: #FFF176;
+    --navbar-text-active: #FFFFFF;
+    --navbar-shadow: rgba(78, 52, 46, 0.2);
+
+    --accent: #f59e0b;
+    --success: #10b981;
+    --success-dark: #2E7D32;
+    --success-soft: #ecfdf5;
+    --danger: #ef4444;
+    
+    --ink: #0f172a;
+    --ink-light: #1e293b;
+    --muted: #64748b;
+    --muted-light: #94a3b8;
+    --line: #e2e8f0;
+    --line-subtle: #f1f5f9;
+    --bg-body: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-surface: #f1f5f9;
+
+    --radius-xs: 6px;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --radius-full: 9999px;
+    --shadow-sm: 0 2px 4px 0 rgba(15, 23, 42, 0.04);
+    --shadow-md: 0 4px 12px -2px rgba(15, 23, 42, 0.08);
+    --shadow-lg: 0 12px 24px -4px rgba(15, 23, 42, 0.08);
+    
+    --transition-fast: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ===== 2. Reset & Căn Bản ===== */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-body);
+    color: var(--ink);
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    letter-spacing: -0.011em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+}
+
+::selection {
+    background-color: #abccf8;
+    color: var(--brand-dark);
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+a {
+    color: var(--brand);
+    text-decoration: none;
+    transition: var(--transition-fast);
+}
+a:hover {
+    color: var(--brand-dark);
+}
+
+/* ===== 3. Nút & Form ===== */
+.btn {
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 0.925rem;
+    padding: 0.55rem 1.15rem;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    box-shadow: none;
+}
+.btn:active {
+    transform: scale(0.98);
+}
+
+.btn-primary {
+    background: var(--brand-gradient);
+    border: 1px solid transparent;
+    color: #ffffff;
+}
+.btn-primary:hover {
+    transform: translateY(-1px);
+}
+
+.form-control, .form-select {
+    border-radius: var(--radius-sm);
+    border: 1.5px solid var(--line);
+    padding: 0.58rem 0.95rem;
+    font-size: 0.925rem;
+    transition: var(--transition);
+}
+.form-control:focus, .form-select:focus {
+    border-color: var(--brand-light);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+    outline: none;
+}
+
+/* ===== 4. HEADER & THANH ĐIỀU HƯỚNG ===== */
+.site-navbar {
+    background: var(--navbar-bg);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--navbar-border);
+    padding: 0.75rem 0;
+    box-shadow: 0 3px 12px var(--navbar-shadow);
+    transition: var(--transition);
+}
+
+.site-navbar .navbar-brand {
+    font-weight: 800;
+    font-size: 1.25rem;
+    color: #FFF8E1;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    letter-spacing: -0.03em;
+    padding: 0;
+    text-decoration: none;
+}
+
+.brand-logo-img {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    margin-right: 8px;
+}
+
+.brand-highlight {
+    color: #FFD700;
+    font-weight: 900;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+}
+
+.site-navbar .nav-link {
+    color: var(--navbar-text);
+    font-weight: 800;
+    font-size: 0.95rem;
+    padding: 0.6rem 1.1rem;
+    border-radius: 8px;
+    transition: var(--transition-fast);
+    border: none !important;
+    background: transparent !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35), 
+                 0 0 1px rgba(255, 215, 0, 0.4);
+}
+.site-navbar .nav-link:hover {
+    color: var(--navbar-text-hover);
+    background: rgba(255, 215, 0, 0.15);
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4), 
+                 0 0 4px rgba(255, 215, 0, 0.3);
+}
+.site-navbar .nav-link.active {
+    color: var(--navbar-text-active);
+    background: rgba(255, 215, 0, 0.2);
+    font-weight: 900;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* NÚT ĐĂNG KÝ */
+#nav-register {
+    border: 1.5px solid rgba(255, 215, 0, 0.6) !important;
+    color: #FFD700 !important;
+    background: transparent !important;
+    font-weight: 700 !important;
+    border-radius: 9999px !important;
+    padding: 0.55rem 1.15rem !important;
+    transition: var(--transition) !important;
+}
+#nav-register:hover {
+    background: rgba(255, 215, 0, 0.15) !important;
+    border-color: #FFD700 !important;
+    color: #FFFFFF !important;
+}
+
+/* NÚT ĐĂNG NHẬP */
+#nav-login {
+    border: 1.5px solid var(--success-dark) !important;
+    background: var(--success-dark) !important;
+    color: #FFFFFF !important;
+    font-weight: 700 !important;
+    border-radius: 9999px !important;
+    padding: 0.55rem 1.15rem !important;
+    transition: var(--transition) !important;
+}
+#nav-login:hover {
+    background: #388E3C !important;
+    border-color: #388E3C !important;
+    color: #FFFFFF !important;
+}
+
+/* GIỎ HÀNG */
+.cart-link {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    color: #FFD700 !important;
+    font-weight: 800 !important;
+    padding: 0.6rem 1rem !important;
+    text-decoration: none !important;
+}
+.cart-link i {
+    font-size: 1.25rem !important;
+    color: #FFD700 !important;
+    line-height: 1 !important;
+}
+.cart-link:hover,
+.cart-link:hover i {
+    color: #FFF176 !important;
+}
+
+/* NÚT MƯỢN SÁCH & TRẢ SÁCH */
+#nav-muon, #nav-tra {
+    color: #FFD700 !important;
+    font-weight: 800 !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35),
+                 0 0 1px rgba(255, 215, 0, 0.4);
+    padding: 0.6rem 1rem !important;
+    border-radius: 8px !important;
+    transition: all 0.25s ease !important;
+}
+#nav-muon:hover, #nav-tra:hover {
+    color: #FFF176 !important;
+    background: rgba(255, 215, 0, 0.15) !important;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4),
+                 0 0 4px rgba(255, 215, 0, 0.3);
+}
+#nav-muon i, #nav-tra i {
+    color: inherit !important;
+}
+
+#nav-login i, #nav-register i {
+    color: inherit !important;
+}
+
+/* ===== 5. DANH SÁCH SÁCH — KHUNG ĐẸP MẮT ===== */
+.books-layout {
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr);
+    gap: 25px;
+    align-items: start;
+}
+
+.books-sidebar {
+    background: #fff;
+    border: 1px solid #e2d3c0;
+    border-radius: 12px;
+    overflow: hidden;
+    position: sticky;
+    top: 20px;
+    box-shadow: 0 2px 8px rgba(139, 90, 43, 0.06);
+}
+
+.books-sidebar-title {
+    background: linear-gradient(90deg, #8B5A2B, #A67C52);
+    color: white;
+    padding: 16px 14px;
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.books-category {
+    display: block;
+    padding: 14px 16px;
+    color: #5D4037;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    border-bottom: 1px solid #f0e6d8;
+    transition: all 0.2s ease;
+}
+.books-category:hover {
+    background: #FFF3E0;
+    color: #8B5A2B;
+    padding-left: 22px;
+}
+.books-category.active {
+    background: linear-gradient(90deg, #8B5A2B, #A67C52);
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.books-main {
+    min-width: 0;
+}
+
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 24px;
+}
+
+.book-card {
+    display: flex;
+    flex-direction: column;
+    border: none;
+    border-radius: 20px;
+    background: #ffffff;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(139, 90, 43, 0.08),
+                0 1px 3px rgba(139, 90, 43, 0.05);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+}
+.book-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #8B5A2B, #D4A55A, #8B5A2B);
+    z-index: 1;
+}
+.book-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 18px 30px rgba(139, 90, 43, 0.15),
+                0 6px 16px rgba(139, 90, 43, 0.1);
+}
+
+.book-cover {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 280px;
+    padding: 1.5rem;
+    background: linear-gradient(180deg, #FFF8E7 0%, #FFFAF0 100%);
+    border-bottom: 1px solid #F5E6D3;
+    position: relative;
+    overflow: hidden;
+}
+.book-cover img {
+    width: auto;
+    height: 100%;
+    max-width: 85%;
+    object-fit: contain;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    transition: transform 0.35s ease;
+}
+.book-card:hover .book-cover img {
+    transform: scale(1.08);
+}
+
+.book-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 1.5rem 1.4rem 1.25rem;
+    background: #ffffff;
+}
+
+.book-title {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #5D4037;
+    line-height: 1.4;
+    margin: 0 0 0.5rem;
+    min-height: 3rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    transition: color 0.2s ease;
+}
+.book-card:hover .book-title {
+    color: #8B5A2B;
+}
+
+.book-author {
+    font-size: 0.9rem;
+    color: #8D6E63;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.book-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    margin-top: auto;
+    background: linear-gradient(135deg, #8B5A2B 0%, #A67C52 100%);
+    color: #ffffff !important;
+    font-weight: 700;
+    font-size: 0.9rem;
+    border-radius: 12px;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(139, 90, 43, 0.2);
+    transition: all 0.25s ease;
+}
+.book-link:hover {
+    background: linear-gradient(135deg, #704A28 0%, #8B5A2B 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(139, 90, 43, 0.25);
+    color: #FFF8DC !important;
+}
+
+/* ===== 6. TRANG GIỚI THIỆU ===== */
+body .team-avatar {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: flex-start !important;
+    flex-wrap: nowrap !important;
+    gap: 40px !important;
+    width: 100% !important;
+    max-width: 900px !important;
+    margin: 30px auto !important;
+}
+
+body .team-avatar .member {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    flex: 0 1 220px !important;
+    width: 220px !important;
+    min-width: 0 !important;
+    text-align: center !important;
+}
+
+body .team-avatar img.avatar {
+    display: block !important;
+    width: 180px !important;
+    height: 180px !important;
+    min-width: 180px !important;
+    max-width: 180px !important;
+    min-height: 180px !important;
+    max-height: 180px !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    border-radius: 50% !important;
+    margin: 0 auto 12px !important;
+    box-shadow: 0 6px 16px rgba(139, 90, 43, 0.15);
+}
+
+body .team-avatar .member h3 {
+    margin: 0 0 5px !important;
+    font-size: 19px !important;
+    font-weight: 800 !important;
+    color: #5D4037;
+    text-align: center !important;
+}
+
+body .team-avatar .member span {
+    display: block !important;
+    font-size: 14px !important;
+    color: #8D6E63;
+    text-align: center !important;
+}
+
+/* ===== 7. ẢNH TRANG CHỦ ===== */
+.library-home-container {
+    width: 100%;
+    max-width: 1035px;
+    margin: 0 auto;
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+
+.library-home-image {
+    display: block;
+    width: 100%;
+    max-width: 1035px;
+    height: 337px !important;
+    object-fit: cover;
+    object-position: center;
+    margin: 0 auto;
+    border-radius: 16px;
+    box-shadow: 0 6px 16px rgba(139, 90, 43, 0.12);
+}
+
+/* ===== 8. FOOTER ===== */
+.site-footer {
+    background: #0f172a;
+    color: #94a3b8;
+    border-top: 1px solid #1e293b;
+    margin-top: auto;
+    padding: 1.5rem 0;
+}
+.site-footer strong {
+    color: #f8fafc;
+    font-size: 1.15rem;
+    font-weight: 800;
+}
+.site-footer a {
+    color: #94a3b8;
+    font-weight: 500;
+}
+.site-footer a:hover {
+    color: #ffffff;
+}
+
+/* ===== 9. RESPONSIVE ===== */
+@media (max-width: 992px) {
+    .books-layout {
+        grid-template-columns: 190px minmax(0, 1fr);
+        gap: 15px;
+    }
+    .books-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .site-navbar .nav-search { margin: 0.5rem 0; }
+    .site-navbar .nav-search input { min-width: 100%; }
+    .books-layout {
+        grid-template-columns: 1fr;
+    }
+    .books-sidebar {
+        position: static;
+    }
+    .books-grid {
+        grid-template-columns: 1fr !important;
+    }
+    .book-cover { height: 240px; }
+}
+
+@media (max-width: 500px) {
+    body .team-avatar {
+        gap: 15px !important;
+    }
+    body .team-avatar .member {
+        flex: 1 1 0 !important;
+        width: auto !important;
+    }
+    body .team-avatar img.avatar {
+        width: 120px !important;
+        height: 120px !important;
+        min-width: 120px !important;
+        max-width: 120px !important;
+        min-height: 120px !important;
+        max-height: 120px !important;
+    }
+    body .team-avatar .member h3 {
+        font-size: 14px !important;
+    }
+    body .team-avatar .member span {
+        font-size: 11px !important;
+    }
+}
+/* ===== 10. TRANG CHI TIẾT SÁCH — ĐÓNG KHUNG ĐẸP ===== */
+.book-detail-container {
+    max-width: 900px;
+    margin: 2rem auto 3rem;
+    padding: 0 1.5rem;
+}
+
+.book-detail-card {
+    background: #ffffff;
+    border-radius: 24px;
+    box-shadow: 0 4px 20px rgba(139, 90, 43, 0.1),
+                0 1px 4px rgba(139, 90, 43, 0.05);
+    overflow: hidden;
+    position: relative;
+}
+.book-detail-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #8B5A2B, #D4A55A, #8B5A2B);
+    z-index: 1;
+}
+
+.book-detail-inner {
+    display: grid;
+    grid-template-columns: 320px minmax(0, 1fr);
+    gap: 2.5rem;
+    padding: 2.5rem;
+}
+
+/* Bìa sách */
+.book-detail-cover {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 1rem;
+    background: linear-gradient(180deg, #FFF8E7 0%, #FFFAF0 100%);
+    border-radius: 16px;
+}
+.book-detail-cover img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease;
+}
+.book-detail-cover img:hover {
+    transform: scale(1.03);
+}
+
+/* Thông tin sách */
+.book-detail-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.book-detail-title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #5D4037;
+    margin: 0 0 1rem;
+    line-height: 1.3;
+}
+
+.book-detail-meta {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 0.75rem 1rem;
+    margin-bottom: 1.5rem;
+}
+.book-detail-meta dt {
+    font-weight: 700;
+    color: #8B5A2B;
+}
+.book-detail-meta dd {
+    margin: 0;
+    color: #5D4037;
+}
+
+.book-detail-desc {
+    color: #6D4C41;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+}
+
+/* Nút hành động */
+.book-detail-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: auto;
+}
+
+.btn-muon-sach {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 2rem;
+    background: linear-gradient(135deg, #8B5A2B 0%, #A67C52 100%);
+    color: #ffffff !important;
+    font-weight: 800;
+    font-size: 1rem;
+    border-radius: 14px;
+    border: none;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(139, 90, 43, 0.25);
+    transition: all 0.25s ease;
+}
+.btn-muon-sach:hover {
+    background: linear-gradient(135deg, #704A28 0%, #8B5A2B 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(139, 90, 43, 0.3);
+    color: #FFF8DC !important;
+}
+
+.btn-tra-sach {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 2rem;
+    background: transparent;
+    color: #8B5A2B !important;
+    font-weight: 800;
+    font-size: 1rem;
+    border-radius: 14px;
+    border: 2px solid #8B5A2B;
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+.btn-tra-sach:hover {
+    background: #8B5A2B;
+    color: #ffffff !important;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(139, 90, 43, 0.2);
+}
+
+.btn-danh-sach {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 2rem;
+    background: #f5f5f5;
+    color: #6D4C41 !important;
+    font-weight: 700;
+    font-size: 1rem;
+    border-radius: 14px;
+    border: none;
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+.btn-danh-sach:hover {
+    background: #e8e8e8;
+    color: #5D4037 !important;
+    transform: translateY(-2px);
+}
+
+.breadcrumb {
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+}
+.breadcrumb a {
+    color: #8B5A2B;
+    text-decoration: none;
+}
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+.breadcrumb span {
+    color: #8D6E63;
+}
+
+/* Responsive trang chi tiết */
+@media (max-width: 768px) {
+    .book-detail-inner {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 1.5rem;
+    }
+    .book-detail-cover {
+        max-width: 280px;
+        margin: 0 auto;
+    }
+    .book-detail-actions {
+        flex-direction: column;
+    }
+    .btn-muon-sach, .btn-tra-sach, .btn-danh-sach {
+        width: 100%;
+        justify-content: center;
+    }
+}
+

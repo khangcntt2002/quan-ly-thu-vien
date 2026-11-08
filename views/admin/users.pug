@@ -1,0 +1,26 @@
+extends ../layout
+
+block content
+    h1.h3.mb-3 Quản lý tài khoản
+    p.text-secondary Danh sách tài khoản đã đăng ký trong hệ thống.
+    .table-responsive
+        table.table.table-hover.align-middle
+            thead
+                tr
+                    th Họ tên
+                    th Email
+                    th Vai trò
+                    th Ngày tạo
+            tbody
+                if users && users.length
+                    each account in users
+                        tr
+                            td= account.name
+                            td= account.email
+                            td
+                                span.badge(class=account.role === 'admin' ? 'text-bg-success' : 'text-bg-secondary')= account.role
+                            td= account.createdAt ? new Date(account.createdAt).toLocaleDateString('vi-VN') : ''
+                else
+                    tr
+                        td(colspan='4').text-center Chưa có tài khoản.
+    a.btn.btn-outline-secondary.mt-3(href='/admin') Quay lại quản trị

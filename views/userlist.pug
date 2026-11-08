@@ -1,0 +1,30 @@
+extends layout
+block content
+  h1 Quản lý user
+  p
+    a.btn.btn-primary(href='/user/add') Thêm user
+  .table-responsive
+    table.table.table-bordered
+      thead
+        tr
+          th ID
+          th Username
+          th Họ tên
+          th Email
+          th Thao tác
+      tbody
+        each u in users
+          tr
+            td= u.id
+            td= u.username
+            td= u.fullname
+            td= u.email
+            td
+              a(href='/user/' + u.id) Xem
+              |  · 
+              a(href='/user/' + u.id + '/edit') Sửa
+              |  · 
+              a(href='/user/' + u.id + '/delete') Xóa
+        else
+          tr
+            td(colspan='5') Chưa có user
