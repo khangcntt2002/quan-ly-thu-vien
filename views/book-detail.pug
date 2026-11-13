@@ -58,16 +58,16 @@ block content
                                         | Xác nhận trả sách
                                 a.btn.btn-outline-primary.mt-2(href="/borrow/my") Xem các sách đã mượn
                             else
-                                form(action="/borrow/book" method="post")
+                                form(action="/borrow/payment" method="get")
                                     input(type="hidden" name="bookId" value=book._id)
                                     p.text-success.fw-semibold
                                         | Phí mượn: #{(book.dailyRentalFee || 5000).toLocaleString('vi-VN')} ₫/ngày
                                     .mb-2
                                         label.form-label Hẹn trả trước:
-                                        input(type="date" name="dueDate" min=new Date().toISOString().slice(0,10) required)
+                                        input.form-control(type="date" name="dueDate" min=new Date().toLocaleDateString('en-CA') required)
                                     button(type="submit").btn-muon-sach
-                                        i.bi.bi-book-plus.me-1
-                                        | Mượn sách
+                                        i.bi.bi-credit-card.me-1
+                                        | Tiếp tục thanh toán
                         else
                             // Chưa đăng nhập → mời đăng nhập
                             p Vui lòng 

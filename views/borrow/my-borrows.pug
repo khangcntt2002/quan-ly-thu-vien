@@ -5,6 +5,12 @@ block content
     h2.mb-2 Sách của tôi
     p.text-secondary Theo dõi sách đang mượn, lịch sử đã trả và phí mượn.
 
+    if borrowedSuccessfully
+      .alert.alert-success.alert-dismissible.fade.show(role="alert")
+        strong Thanh toán thành công!
+        |  Bạn đã mượn sách. Chúc bạn đọc sách vui vẻ.
+        button.btn-close(type="button" data-bs-dismiss="alert" aria-label="Đóng")
+
     if returnedSuccessfully
       .alert.alert-success.alert-dismissible.fade.show(role="alert")
         strong Trả sách thành công!
@@ -32,7 +38,7 @@ block content
           a.btn.btn-primary(href="/book") Khám phá sách
         else
           .alert.alert-info
-            | Phí được tính theo số ngày thực tế giữ sách (tối thiểu 1 ngày). Tổng phí sẽ được chốt khi bạn trả sách.
+            | Bạn đã thanh toán trước cho số ngày đăng ký. Nếu trả trễ, phụ thu 5.000 ₫/ngày (theo phí của sách) sẽ được tính khi trả.
           .table-responsive
             table.table.table-striped.table-hover.align-middle
               thead
@@ -40,7 +46,7 @@ block content
                   th Tên sách
                   th Phí/ngày
                   th Số ngày
-                  th Thành tiền tạm tính
+                  th Đã thanh toán
                   th Ngày mượn
                   th Hẹn trả
                   th Trạng thái
@@ -56,7 +62,9 @@ block content
                     td= (borrow.dailyRentalFee || (borrow.book && borrow.book.dailyRentalFee) || 5000).toLocaleString('vi-VN') + ' ₫'
                     td= borrow.calculatedRentalDays || 1
                     td
-                      strong= (borrow.calculatedRentalFee || 0).toLocaleString('vi-VN') + ' ₫'
+                      strong= (borrow.paidAmount || 0).toLocaleString('vi-VN') + ' ₫'
+                      if borrow.calculatedLateDays > 0
+                        small.d-block.text-danger= 'Phụ thu trễ: ' + (borrow.calculatedLateFee || 0).toLocaleString('vi-VN') + ' ₫'
                     td= borrow.borrowDate ? new Date(borrow.borrowDate).toLocaleDateString('vi-VN') : '—'
                     td= borrow.dueDate ? new Date(borrow.dueDate).toLocaleDateString('vi-VN') : '—'
                     td
@@ -97,7 +105,7 @@ block content
                     td= (borrow.dailyRentalFee || (borrow.book && borrow.book.dailyRentalFee) || 5000).toLocaleString('vi-VN') + ' ₫'
                     td= borrow.rentalDays || 1
                     td
-                      strong= (borrow.totalRentalFee || 0).toLocaleString('vi-VN') + ' ₫'
+                      strong= (borrow.totalRentalFee || 0).toLocaleString('vi-VN') + ' ₫'\n                      if borrow.lateDays > 0\n                        small.d-block.text-danger= 'Trong đó phụ thu trễ: ' + (borrow.lateFee || 0).toLocaleString('vi-VN') + ' ₫'
                     td= borrow.borrowDate ? new Date(borrow.borrowDate).toLocaleDateString('vi-VN') : '—'
                     td= borrow.returnDate ? new Date(borrow.returnDate).toLocaleDateString('vi-VN') : '—'
                     td

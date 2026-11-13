@@ -1,0 +1,122 @@
+extends ../layout
+
+block content
+    .d-flex.flex-wrap.justify-content-between.align-items-center.gap-2.mb-4
+        div
+            p.text-primary.fw-semibold.mb-1 KHU VỰC QUẢN TRỊ
+            h1.h3.mb-1 Quản lý thu chi
+            p.text-secondary.mb-0 Tổng hợp doanh thu và chi phí trong #{monthLabel}.
+        a.btn.btn-outline-secondary(href='/admin') Quay lại Admin
+
+    if query && query.saved === '1'
+        .alert.alert-success Đã ghi nhận khoản chi thành công.
+    if query && query.error === 'invalid'
+        .alert.alert-danger Thông tin khoản chi không hợp lệ. Vui lòng kiểm tra lại.
+
+    .row.g-3.mb-4
+        .col-6.col-lg-3
+            .card.border-0.shadow-sm.rounded-4.h-100(style='background:#e0f2fe')
+                .card-body.p-3
+                    p.text-primary.mb-2 Tổng thu
+                    h2.h4.text-primary.mb-0= summary.totalIncome.toLocaleString('vi-VN') + ' ₫'
+        .col-6.col-lg-3
+            .card.border-0.shadow-sm.rounded-4.h-100(style='background:#fee2e2')
+                .card-body.p-3
+                    p.text-danger.mb-2 Tổng chi
+                    h2.h4.text-danger.mb-0= summary.totalExpense.toLocaleString('vi-VN') + ' ₫'
+        .col-6.col-lg-3
+            .card.border-0.shadow-sm.rounded-4.h-100(style='background:#dcfce7')
+                .card-body.p-3
+                    p.text-success.mb-2 Chênh lệch thu - chi
+                    h2.h4.text-success.mb-0= summary.profit.toLocaleString('vi-VN') + ' ₫'
+        .col-6.col-lg-3
+            .card.border-0.shadow-sm.rounded-4.h-100(style='background:#f3e8ff')
+                .card-body.p-3
+                    p.text-purple.mb-2 Lượt thanh toán
+                    h2.h4.mb-0= summary.paymentCount
+
+    .row.g-3.mb-4
+        .col-lg-6
+            .card.border-0.shadow-sm.rounded-4.h-100
+                .card-body.p-4
+                    h2.h5.mb-3 Chi tiết khoản thu
+                    .d-flex.justify-content-between.py-2.border-bottom
+                        span Phí mượn sách đã thanh toán
+                        strong= summary.rentalRevenue.toLocaleString('vi-VN') + ' ₫'
+                    .d-flex.justify-content-between.py-2
+                        span Phụ thu trả trễ đã chốt
+                        strong= summary.lateRevenue.toLocaleString('vi-VN') + ' ₫'
+        .col-lg-6
+            .card.border-0.shadow-sm.rounded-4.h-100
+                .card-body.p-4
+                    h2.h5.mb-3 Ghi nhận khoản chi
+                    form(method='POST', action='/admin/thu-chi/expense')
+                        .mb-3
+                            label.form-label(for='title') Tên khoản chi
+                            input#title.form-control(type='text', name='title', maxlength='120', required, placeholder='Ví dụ: Mua sách mới')
+                        .row.g-2
+                            .col-md-6.mb-3
+                                label.form-label(for='category') Danh mục
+                                select#category.form-select(name='category')
+                                    option(value='Mua sách') Mua sách
+                                    option(value='Vận hành') Vận hành
+                                    option(value='Sửa chữa') Sửa chữa
+                                    option(value='Khác') Khác
+                            .col-md-6.mb-3
+                                label.form-label(for='amount') Số tiền (₫)
+                                input#amount.form-control(type='number', name='amount', min='1', step='1', required, placeholder='500000')
+                        .mb-3
+                            label.form-label(for='expenseDate') Ngày chi
+                            input#expenseDate.form-control(type='date', name='expenseDate', required, max=new Date().toISOString().slice(0,10), value=new Date().toISOString().slice(0,10))
+                        .mb-3
+                            label.form-label(for='note') Ghi chú
+                            textarea#note.form-control(name='note', rows='2', maxlength='500', placeholder='Ghi chú thêm nếu có')
+                        button.btn.btn-primary(type='submit') Lưu khoản chi
+
+    .card.border-0.shadow-sm.rounded-4.mb-4
+        .card-body.p-3.p-md-4
+            h2.h5.mb-3 Lịch sử thanh toán mượn sách
+            .table-responsive
+                table.table.table-hover.align-middle
+                    thead
+                        tr
+                            th Ngày thanh toán
+                            th Người mượn
+                            th Tên sách
+                            th.text-end Số tiền
+                    tbody
+                        if borrowPayments && borrowPayments.length
+                            each payment in borrowPayments
+                                tr
+                                    td= payment.paymentDate ? new Date(payment.paymentDate).toLocaleDateString('vi-VN') : ''
+                                    td= payment.user ? payment.user.name : 'Tài khoản đã xóa'
+                                    td= payment.book ? payment.book.title : 'Sách đã xóa'
+                                    td.text-end.fw-semibold= (payment.paidAmount || 0).toLocaleString('vi-VN') + ' ₫'
+                        else
+                            tr
+                                td.text-center.text-secondary(colspan='4') Chưa có thanh toán trong tháng này.
+
+    .card.border-0.shadow-sm.rounded-4
+        .card-body.p-3.p-md-4
+            h2.h5.mb-3 Các khoản chi trong tháng
+            .table-responsive
+                table.table.table-hover.align-middle
+                    thead
+                        tr
+                            th Ngày chi
+                            th Khoản chi
+                            th Danh mục
+                            th Ghi chú
+                            th.text-end Số tiền
+                    tbody
+                        if expenses && expenses.length
+                            each item in expenses
+                                tr
+                                    td= new Date(item.expenseDate).toLocaleDateString('vi-VN')
+                                    td.fw-semibold= item.title
+                                    td= item.category
+                                    td= item.note || '-'
+                                    td.text-end= item.amount.toLocaleString('vi-VN') + ' ₫'
+                        else
+                            tr
+                                td.text-center.text-secondary(colspan='5') Chưa ghi nhận khoản chi nào trong tháng này.

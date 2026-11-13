@@ -1,0 +1,43 @@
+extends ../layout
+
+block content
+  .container.py-5
+    .row.justify-content-center
+      .col-lg-7
+        .card.border-0.shadow-sm.rounded-4
+          .card-body.p-4.p-md-5
+            .d-flex.align-items-center.justify-content-between.mb-3
+              h2.mb-0 Xác nhận thanh toán
+              span.badge.bg-warning.text-dark Bản demo
+            p.text-secondary Bạn cần thanh toán phí mượn trước khi hệ thống tạo lượt mượn sách.
+            .d-flex.gap-3.align-items-center.mb-4
+              img.rounded(src=book.image || '/images/default-book.jpg' alt=book.title style='width:84px;height:112px;object-fit:cover')
+              div
+                h5.mb-1= book.title
+                p.text-secondary.mb-0= book.author
+            .table-responsive
+              table.table.align-middle
+                tbody
+                  tr
+                    th Ngày hẹn trả
+                    td.text-end= dueDate.toLocaleDateString('vi-VN')
+                  tr
+                    th Số ngày thanh toán
+                    td.text-end= paidDays + ' ngày'
+                  tr
+                    th Phí mỗi ngày
+                    td.text-end= dailyRentalFee.toLocaleString('vi-VN') + ' ₫'
+                  tr
+                    th Tổng thanh toán
+                    td.text-end
+                      strong.fs-4.text-primary= totalAmount.toLocaleString('vi-VN') + ' ₫'
+            .alert.alert-info
+              i.bi.bi-info-circle.me-1
+              | Đây là thanh toán mô phỏng để phục vụ bài tập. Không có tiền thật được chuyển.
+            form(action='/borrow/payment/confirm' method='post')
+              input(type='hidden' name='bookId' value=book._id)
+              input(type='hidden' name='dueDate' value=dueDateInput)
+              button.btn.btn-primary.btn-lg.w-100(type='submit' onclick="return confirm('Xác nhận thanh toán mô phỏng và mượn sách?')")
+                i.bi.bi-check-circle.me-2
+                | Xác nhận đã thanh toán
+            a.btn.btn-outline-secondary.w-100.mt-2(href='/book/' + book._id) Quay lại chi tiết sách
