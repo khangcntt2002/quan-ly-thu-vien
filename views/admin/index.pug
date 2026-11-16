@@ -9,26 +9,26 @@ block content
 
         .row.g-3.my-4
             .col-6.col-lg-3
-                .card.border-0.shadow-sm.rounded-4.h-100.bg-primary.text-white
+                .card.admin-stat-card.h-100
                     .card-body.p-3
                         p.mb-2 📚 Tổng số sách
                         h2.h3.mb-0= summary.books || 0
             .col-6.col-lg-3
-                .card.border-0.shadow-sm.rounded-4.h-100.bg-success.text-white
+                .card.admin-stat-card.h-100
                     .card-body.p-3
                         p.mb-2 👥 Tài khoản
                         h2.h3.mb-0= summary.users || 0
             .col-6.col-lg-3
-                .card.border-0.shadow-sm.rounded-4.h-100.bg-warning.text-dark
+                .card.admin-stat-card.h-100
                     .card-body.p-3
                         p.mb-2 📝 Tổng lượt mượn
                         h2.h3.mb-0= summary.borrows || 0
             .col-6.col-lg-3
-                .card.border-0.shadow-sm.rounded-4.h-100.bg-info.text-dark
+                .card.admin-stat-card.h-100
                     .card-body.p-3
                         p.mb-2 📖 Đang mượn
                         h2.h3.mb-0= summary.activeBorrows || 0
-        .card.border-0.shadow-sm.rounded-4.mb-4(style='background:linear-gradient(120deg,#0f766e,#14b8a6);color:white')
+        .card.admin-revenue-card.mb-4
             .card-body.p-4
                 p.mb-1.opacity-75 Tổng tiền thanh toán trong tháng này
                 h2.h3.mb-0= (summary.monthlyRevenue || 0).toLocaleString('vi-VN') + ' ₫'
@@ -37,32 +37,32 @@ block content
         h2.h5.mb-3 Chức năng quản trị
         .row.g-3
             .col-sm-6.col-lg-4
-                a.card.border-0.shadow-sm.rounded-4.text-decoration-none.h-100.bg-primary.text-white(href='/book/add')
+                a.card.admin-action-card.text-decoration-none.h-100(href='/book/add')
                     .card-body.p-4
                         .fs-2.mb-2 📕
                         h3.h5 Thêm sách
-                        p.mb-0.opacity-75 Thêm sách mới vào thư viện.
+                        p.mb-0 Thêm sách mới vào thư viện.
             .col-sm-6.col-lg-4
-                a.card.border-0.shadow-sm.rounded-4.text-decoration-none.h-100.bg-info.text-dark(href='/book')
+                a.card.admin-action-card.text-decoration-none.h-100(href='/book')
                     .card-body.p-4
                         .fs-2.mb-2 📚
                         h3.h5 Quản lý sách
                         p.mb-0 Xem, chỉnh sửa và xóa sách.
             .col-sm-6.col-lg-4
-                a.card.border-0.shadow-sm.rounded-4.text-decoration-none.h-100.bg-success.text-white(href='/admin/users')
+                a.card.admin-action-card.text-decoration-none.h-100(href='/admin/users')
                     .card-body.p-4
                         .fs-2.mb-2 👥
                         h3.h5 Quản lý tài khoản
-                        p.mb-0.opacity-75 Xem và xóa tài khoản User.
+                        p.mb-0 Xem và xóa tài khoản User.
             .col-sm-6.col-lg-4
-                a.card.border-0.shadow-sm.rounded-4.text-decoration-none.h-100.bg-warning.text-dark(href='/borrow/all')
+                a.card.admin-action-card.text-decoration-none.h-100(href='/borrow/all')
                     .card-body.p-4
                         .fs-2.mb-2 🔄
                         h3.h5 Quản lý mượn/trả
                         p.mb-0 Theo dõi các lượt mượn và trả sách.
             .col-sm-6.col-lg-4
-                a.card.border-0.shadow-sm.rounded-4.text-decoration-none.h-100.text-white(style='background:linear-gradient(135deg,#7c3aed,#a78bfa)', href='/admin/thu-chi')
+                a.card.admin-action-card.text-decoration-none.h-100(href='/admin/thu-chi')
                     .card-body.p-4
                         .fs-2.mb-2 💰
                         h3.h5 Quản lý thu chi
-                        p.mb-0.opacity-75 Xem doanh thu, chi phí và lợi nhuận theo tháng.
+                        p.mb-0 Xem doanh thu, chi phí và lợi nhuận theo tháng.

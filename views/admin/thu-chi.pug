@@ -15,29 +15,29 @@ block content
 
     .row.g-3.mb-4
         .col-6.col-lg-3
-            .card.border-0.shadow-sm.rounded-4.h-100(style='background:#e0f2fe')
+            .card.admin-stat-card.h-100
                 .card-body.p-3
-                    p.text-primary.mb-2 Tổng thu
-                    h2.h4.text-primary.mb-0= summary.totalIncome.toLocaleString('vi-VN') + ' ₫'
+                    p.admin-card-label.mb-2 Tổng thu
+                    h2.h4.admin-card-value.mb-0= summary.totalIncome.toLocaleString('vi-VN') + ' ₫'
         .col-6.col-lg-3
-            .card.border-0.shadow-sm.rounded-4.h-100(style='background:#fee2e2')
+            .card.admin-stat-card.h-100
                 .card-body.p-3
-                    p.text-danger.mb-2 Tổng chi
-                    h2.h4.text-danger.mb-0= summary.totalExpense.toLocaleString('vi-VN') + ' ₫'
+                    p.admin-card-label.mb-2 Tổng chi
+                    h2.h4.admin-card-value.mb-0= summary.totalExpense.toLocaleString('vi-VN') + ' ₫'
         .col-6.col-lg-3
-            .card.border-0.shadow-sm.rounded-4.h-100(style='background:#dcfce7')
+            .card.admin-stat-card.h-100
                 .card-body.p-3
-                    p.text-success.mb-2 Chênh lệch thu - chi
-                    h2.h4.text-success.mb-0= summary.profit.toLocaleString('vi-VN') + ' ₫'
+                    p.admin-card-label.mb-2 Chênh lệch thu - chi
+                    h2.h4.admin-card-value.mb-0= summary.profit.toLocaleString('vi-VN') + ' ₫'
         .col-6.col-lg-3
-            .card.border-0.shadow-sm.rounded-4.h-100(style='background:#f3e8ff')
+            .card.admin-stat-card.h-100
                 .card-body.p-3
-                    p.text-purple.mb-2 Lượt thanh toán
-                    h2.h4.mb-0= summary.paymentCount
+                    p.admin-card-label.mb-2 Lượt thanh toán
+                    h2.h4.admin-card-value.mb-0= summary.paymentCount
 
     .row.g-3.mb-4
         .col-lg-6
-            .card.border-0.shadow-sm.rounded-4.h-100
+            .card.admin-panel-card.h-100
                 .card-body.p-4
                     h2.h5.mb-3 Chi tiết khoản thu
                     .d-flex.justify-content-between.py-2.border-bottom
@@ -47,7 +47,7 @@ block content
                         span Phụ thu trả trễ đã chốt
                         strong= summary.lateRevenue.toLocaleString('vi-VN') + ' ₫'
         .col-lg-6
-            .card.border-0.shadow-sm.rounded-4.h-100
+            .card.admin-panel-card.h-100
                 .card-body.p-4
                     h2.h5.mb-3 Ghi nhận khoản chi
                     form(method='POST', action='/admin/thu-chi/expense')
@@ -96,7 +96,7 @@ block content
                             tr
                                 td.text-center.text-secondary(colspan='4') Chưa có thanh toán trong tháng này.
 
-    .card.border-0.shadow-sm.rounded-4
+    .card.admin-panel-card
         .card-body.p-3.p-md-4
             h2.h5.mb-3 Các khoản chi trong tháng
             .table-responsive
