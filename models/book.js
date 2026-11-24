@@ -60,7 +60,7 @@ const bookSchema = new mongoose.Schema({
     // Ảnh bìa
     image: {
         type: String,
-        default: '/images/avatar1.png'
+        default: '/images/default-book.svg'
     },
 
     // Giá tham khảo của sách (VNĐ), Admin có thể cập nhật trong form thêm/sửa.

@@ -17,7 +17,7 @@ block content
             .book-detail-inner
                 // Bìa sách
                 .book-detail-cover
-                    img(src=book.image || '/images/default-book.jpg', alt=book.title)
+                    img(src=book.image || '/images/default-book.svg', alt=book.title)
 
                 // Thông tin sách
                 .book-detail-info
@@ -52,7 +52,7 @@ block content
                             // === Đã đăng nhập → hiện form MƯỢN sách ===
                             if isBorrowing
                                 p.alert.alert-info Bạn đang mượn cuốn sách này.
-                                form(action=`/borrow/${activeBorrowId}/return` method="post" onsubmit="return confirm('Xác nhận bạn đã trả sách?')")
+                                form(action=`/borrow/${activeBorrowId}/return` method="post" data-confirm="Xác nhận bạn đã trả sách?")
                                     button(type="submit").btn-tra-sach
                                         i.bi.bi-arrow-return-left.me-1
                                         | Xác nhận trả sách
@@ -68,6 +68,11 @@ block content
                                     button(type="submit").btn-muon-sach
                                         i.bi.bi-credit-card.me-1
                                         | Tiếp tục thanh toán
+                            form.mt-2(action="/cart/add" method="post")
+                                input(type="hidden" name="bookId" value=book._id)
+                                button.btn.btn-outline-primary(type="submit")
+                                    i.bi.bi-cart-plus.me-1
+                                    | Thêm vào giỏ (mua sách)
                         else
                             // Chưa đăng nhập → mời đăng nhập
                             p Vui lòng 
@@ -80,7 +85,7 @@ block content
                                 a.btn.btn-warning(href='/book/' + book._id + '/edit')
                                     i.bi.bi-pencil-square.me-1
                                     | Chỉnh sửa sách
-                                form(action='/book/' + book._id + '/delete' method='post' onsubmit="return confirm('Bạn có chắc chắn muốn xóa sách này không?')")
+                                form(action='/book/' + book._id + '/delete' method='post' data-confirm='Bạn có chắc chắn muốn xóa sách này không?')
                                     button.btn.btn-danger(type='submit')
                                         i.bi.bi-trash.me-1
                                         | Xóa sách

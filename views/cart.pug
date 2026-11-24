@@ -1,0 +1,63 @@
+extends layout
+
+block content
+    .row.justify-content-center.py-3.py-md-4
+        .col-md-8.col-lg-6
+            .card.border-0.shadow-sm.rounded-4
+                .card-body.p-4.p-md-5
+                    h1.h3.mb-3 Giỏ hàng
+                    
+                    //  2 NÚT 
+                    .d-flex.gap-3.mb-4
+                        a(href="/book").btn.btn-primary.flex-fill
+                            | Tiếp tục chọn sách
+                        a(href="/orders").btn.btn-outline-primary.flex-fill
+                            | Đơn hàng của tôi
+                    
+                    if notice
+                        #cart-notice.alert.alert-success.mb-3(role="status")= notice
+                    
+                    if rows.length
+                        .table-responsive.mb-3
+                            table.table.align-middle
+                                thead
+                                    tr
+                                        th Sách
+                                        th Đơn giá
+                                        th Số lượng
+                                        th Thành tiền
+                                        th Thao tác
+                                tbody
+                                    each row in rows
+                                        tr
+                                            td= row.title
+                                            td= row.price === null ? 'Chưa có giá' : row.price.toLocaleString('vi-VN') + ' đ'
+                                            td
+                                                form.d-flex.gap-2(method="POST" action="/cart/update")
+                                                    input(type="hidden" name="bookId" value=row.bookId)
+                                                    input.form-control(type="number" name="qty" value=row.qty min="1" max="10" step="1" required aria-label='Số lượng ' + row.title)
+                                                    button.btn.btn-outline-primary(type="submit") Cập nhật
+                                            td= row.subtotal === null ? 'Không thể đặt' : row.subtotal.toLocaleString('vi-VN') + ' đ'
+                                            td
+                                                form(method="POST" action="/cart/remove")
+                                                    input(type="hidden" name="bookId" value=row.bookId)
+                                                    button.btn.btn-outline-danger(type="submit") Xóa
+                        
+                        .d-flex.flex-wrap.justify-content-between.align-items-center.gap-2.mb-3
+                            p.fw-bold.mb-0 Tổng tiền hiện tại: #{total.toLocaleString('vi-VN')} đ
+                            form(method="POST" action="/cart/clear")
+                                button.btn.btn-outline-danger.btn-sm(type="submit") Xóa toàn bộ giỏ
+                        
+                        p.text-secondary.small.mb-3 Giá được kiểm tra lại từ MongoDB khi xác nhận đặt hàng.
+                        
+                        if canCheckout
+                            form(method="POST" action="/orders")
+                                input(type="hidden" name="requestId" value=requestId)
+                                input(type="hidden" name="items" value=itemsJSON)
+                                label.form-label Địa chỉ nhận sách
+                                textarea.form-control.mb-3(name="address" minlength="5" maxlength="300" required)
+                                button.btn.btn-primary(type="submit") Xác nhận đặt hàng
+                        else
+                            p.text-danger Xóa sách không còn bán hoặc kiểm tra lại giá trước khi đặt.
+                    else
+                        p.text-center.py-3 Giỏ hàng đang trống. Chọn sách tại trang danh sách sách.

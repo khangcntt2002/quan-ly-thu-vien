@@ -143,32 +143,14 @@ block content
                 .books-sidebar-title
                     | DANH MỤC SÁCH
 
-                a.books-category.active(href="/book")
+                - const menuList = ['Văn học', 'Kinh tế', 'Công nghệ', 'Ngoại ngữ', 'Giáo trình', 'Kỹ năng sống', 'Lịch sử', 'Thiếu nhi']
+                - const currentCategory = typeof selectedCategory !== 'undefined' ? selectedCategory : ''
+                //- Mục nào đang được chọn thì sáng lên (class active); "Tất cả sách" sáng khi không lọc
+                a.books-category(href="/book" class=!currentCategory ? 'active' : '' aria-current=!currentCategory ? 'page' : undefined)
                     | Tất cả sách
 
-                a.books-category(href="/book?category=Văn học")
-                    | Văn học
-
-                a.books-category(href="/book?category=Kinh tế")
-                    | Kinh tế
-
-                a.books-category(href="/book?category=Công nghệ")
-                    | Công nghệ
-
-                a.books-category(href="/book?category=Ngoại ngữ")
-                    | Ngoại ngữ
-
-                a.books-category(href="/book?category=Giáo trình")
-                    | Giáo trình
-
-                a.books-category(href="/book?category=Kỹ năng sống")
-                    | Kỹ năng sống
-
-                a.books-category(href="/book?category=Lịch sử")
-                    | Lịch sử
-
-                a.books-category(href="/book?category=Thiếu nhi")
-                    | Thiếu nhi
+                each cat in menuList
+                    a.books-category(href="/book?category=" + encodeURIComponent(cat) class=currentCategory === cat ? 'active' : '' aria-current=currentCategory === cat ? 'page' : undefined)= cat
 
             // DANH SÁCH SÁCH BÊN PHẢI
             main.books-main

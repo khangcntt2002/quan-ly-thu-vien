@@ -1,0 +1,69 @@
+extends ../layout
+
+block content
+    - const fmtDate = d => new Date(d).toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' })
+    .py-3.py-md-4
+        nav.mb-4(aria-label="Đường dẫn")
+            ol.breadcrumb
+                li.breadcrumb-item
+                    a(href="/admin") Quản trị
+                li.breadcrumb-item
+                    a(href="/admin/orders") Đơn hàng
+                li.breadcrumb-item.active(aria-current="page")= String(order._id)
+        h1.h3.mb-3 Đơn hàng #{order._id}
+
+        .row.g-3.mb-4
+            .col-md-6
+                .card.border-0.shadow-sm.rounded-4.h-100
+                    .card-body
+                        h2.h6.text-secondary Người mua
+                        if order.user
+                            p.mb-0= order.user.name
+                            p.mb-0.text-secondary= order.user.email
+                        else
+                            p.mb-0.text-secondary Tài khoản đã xóa
+                        h2.h6.text-secondary.mt-3 Địa chỉ nhận
+                        p.mb-0= order.address
+            .col-md-6
+                .card.border-0.shadow-sm.rounded-4.h-100
+                    .card-body
+                        h2.h6.text-secondary Trạng thái
+                        p
+                            span.badge.fs-6(class=orderStatus.badge(order.status))= orderStatus.label(order.status)
+                        p.mb-1 Ngày đặt: #{fmtDate(order.createdAt)}
+                        p.mb-1 Cập nhật: #{fmtDate(order.updatedAt)}
+                        if order.cancelledAt
+                            p.mb-0 Hủy lúc: #{fmtDate(order.cancelledAt)} (#{order.cancelledBy === 'admin' ? 'quản trị viên' : 'người mua'})
+
+        .table-responsive
+            table.table.align-middle
+                thead.table-light
+                    tr
+                        th Sách
+                        th.text-end Giá lúc đặt
+                        th.text-center Số lượng
+                        th.text-end Thành tiền
+                tbody
+                    each item in order.items
+                        tr
+                            td= item.title
+                            td.text-end #{item.unitPrice.toLocaleString('vi-VN')} đ
+                            td.text-center= item.qty
+                            td.text-end #{(item.unitPrice * item.qty).toLocaleString('vi-VN')} đ
+        p.fw-bold.text-end Tổng tiền: #{order.total.toLocaleString('vi-VN')} đ
+
+        h2.h5.mt-4 Cập nhật trạng thái
+        if nextStatuses.length
+            //- Mỗi nút là 1 form POST riêng; server vẫn kiểm tra lại trạng thái hiện tại
+            .d-flex.flex-wrap.gap-2
+                each s in nextStatuses
+                    form(method="POST" action='/admin/orders/' + order._id + '/status')
+                        input(type="hidden" name="status" value=s)
+                        button.btn(type="submit" class=s === 'cancelled' ? 'btn-outline-danger' : 'btn-primary')
+                            | #{s === 'cancelled' ? 'Hủy đơn' : 'Chuyển sang "' + orderStatus.label(s) + '"'}
+        else
+            p.text-secondary Đơn "#{orderStatus.label(order.status)}" không thể đổi trạng thái nữa.
+
+        a.btn.btn-outline-primary.mt-4(href="/admin/orders")
+            i.bi.bi-arrow-left.me-2
+            | Về danh sách đơn

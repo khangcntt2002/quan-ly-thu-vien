@@ -31,9 +31,13 @@ header
                             | Giới thiệu
 
                     if viewer
-                    
-                        
-                        
+                        li.nav-item
+                            a.nav-link(href="/borrow/my") Sách của tôi
+                        li.nav-item
+                            a.nav-link(href="/cart") Giỏ hàng
+                        li.nav-item
+                            a.nav-link(href="/orders") Đơn hàng
+
                         li.nav-item.ms-lg-2
                             span.nav-link Xin chào, #{viewer.name}
                         

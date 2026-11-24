@@ -1,0 +1,27 @@
+extends layout
+
+block content
+    - const fmtDate = d => new Date(d).toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' })
+    .row.justify-content-center.py-3.py-md-4
+        .col-md-8.col-lg-6
+            .card.border-0.shadow-sm.rounded-4
+                .card-body.p-4.p-md-5
+                    h1.h3.mb-3 Đơn hàng của tôi
+                    
+                    // === ✅ 2 NÚT ===
+                    .d-flex.gap-3.mb-4
+                        a(href="/book").btn.btn-primary.flex-fill
+                            | Chọn sách
+                        a(href="/cart").btn.btn-outline-primary.flex-fill
+                            | Giỏ hàng
+                    
+                    if orders.length
+                        ul.list-group
+                            each order in orders
+                                li.list-group-item.px-0
+                                    a(href='/orders/' + order._id)= String(order._id)
+                                    p.mb-0.small.text-muted
+                                        | #{fmtDate(order.createdAt)} · #{order.total.toLocaleString('vi-VN')} đ ·
+                                        span.ms-2.badge(class=orderStatus.badge(order.status))= orderStatus.label(order.status)
+                    else
+                        p.text-center.py-3 Bạn chưa có đơn hàng nào.

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="320" viewBox="0 0 240 320" role="img" aria-label="Chưa có ảnh bìa">
+  <rect width="240" height="320" rx="10" fill="#f3e6d3"/>
+  <rect x="24" y="24" width="192" height="272" rx="6" fill="#cf873f" opacity=".25"/>
+  <path d="M60 110h120v110a8 8 0 0 1-8 8H68a8 8 0 0 1-8-8z" fill="#99512d" opacity=".85"/>
+  <path d="M120 120v108M60 110c20-10 40-10 60 0 20-10 40-10 60 0" fill="none" stroke="#f3e6d3" stroke-width="4"/>
+  <text x="120" y="262" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#99512d">Chưa có ảnh bìa</text>
+</svg>

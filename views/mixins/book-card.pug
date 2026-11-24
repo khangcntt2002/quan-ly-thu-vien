@@ -2,13 +2,12 @@ mixin bookCard(book, index = 0)
     article.book-card(aria-labelledby='book-title-' + book._id)
         .book-cover
             img(
-                src=book.image || '/images/avatar1.png'
+                src=book.image || '/images/default-book.svg'
                 alt='Bìa sách ' + book.title
                 width="240"
                 height="320"
                 loading=index < 2 ? 'eager' : 'lazy'
                 decoding="async"
-                onerror="this.onerror=null; this.src='/images/avatar1.png'"
             )
         .book-body
             .book-meta

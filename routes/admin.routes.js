@@ -5,6 +5,9 @@ const User = require('../models/mongoUser');
 const Borrow = require('../models/borrow');
 const mongoose = require('mongoose');
 const Expense = require('../models/expense');
+const Order = require('../models/order');
+const Cart = require('../models/cart');
+const orderStatus = require('../utils/order-status');
 
 router.use(requireAuth, requireRole('admin'));
 
@@ -114,9 +117,6 @@ router.post('/thu-chi/expense', async (req, res, next) => {
   }
 });
 
-module.exports = router;
-
-
 // Admin chỉ được xóa tài khoản user thường, không thể tự xóa mình hoặc xóa admin khác.
 router.post('/users/:id/delete', async (req, res, next) => {
   try {
@@ -147,6 +147,7 @@ router.post('/users/:id/delete', async (req, res, next) => {
 
     // Xóa lịch sử mượn của tài khoản cùng lúc để không để lại dữ liệu tham chiếu mồ côi.
     await Borrow.deleteMany({ user: account._id });
+    await Cart.deleteMany({ user: account._id });
     await User.findByIdAndDelete(account._id);
 
     return res.redirect('/admin/users?deleted=1');
@@ -154,3 +155,60 @@ router.post('/users/:id/delete', async (req, res, next) => {
     next(err);
   }
 });
+
+// ===== Quản lý đơn hàng (đơn mua sách từ giỏ hàng) =====
+router.get('/orders', async (req, res, next) => {
+  try {
+    const orders = await Order.find().populate('user', 'name email')
+      .sort({ createdAt: -1 }).limit(200).lean();
+    res.render('admin/orders', { title: 'Quản lý đơn hàng', user: req.user, orders });
+  } catch (err) { next(err); }
+});
+
+router.get('/orders/:id', async (req, res, next) => {
+  try {
+    if (!mongoose.isObjectIdOrHexString(req.params.id)) {
+      return res.status(404).render('error', { status: 404, title: 'Không tìm thấy đơn hàng' });
+    }
+    const order = await Order.findById(req.params.id).select('-fingerprint')
+      .populate('user', 'name email').lean();
+    if (!order) {
+      return res.status(404).render('error', { status: 404, title: 'Không tìm thấy đơn hàng' });
+    }
+    res.render('admin/order-detail', {
+      title: 'Chi tiết đơn hàng', user: req.user, order,
+      nextStatuses: orderStatus.nextOf(order.status)
+    });
+  } catch (err) { next(err); }
+});
+
+// Đổi trạng thái theo luồng hợp lệ. Cập nhật có điều kiện để 2 admin thao tác cùng lúc không ghi đè nhau.
+router.post('/orders/:id/status', async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const target = String(req.body.status || '');
+    if (!mongoose.isObjectIdOrHexString(id) || !orderStatus.STATUSES.includes(target)) {
+      return res.status(400).render('error', { status: 400, title: 'Yêu cầu không hợp lệ' });
+    }
+    const allowedFrom = orderStatus.STATUSES.filter((from) => orderStatus.canMove(from, target));
+    const set = { status: target };
+    if (target === 'cancelled') {
+      set.cancelledAt = new Date();
+      set.cancelledBy = 'admin';
+    }
+    const updated = await Order.findOneAndUpdate(
+      { _id: id, status: { $in: allowedFrom } },
+      { $set: set },
+      { returnDocument: 'after' }
+    );
+    if (!updated) {
+      return res.status(409).render('error', {
+        status: 409, title: 'Không thể đổi trạng thái',
+        message: 'Đơn không tồn tại hoặc trạng thái hiện tại không cho phép chuyển sang bước này.'
+      });
+    }
+    return res.redirect(303, '/admin/orders/' + id);
+  } catch (err) { next(err); }
+});
+
+module.exports = router;

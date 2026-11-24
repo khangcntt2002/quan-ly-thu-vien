@@ -73,7 +73,7 @@ block content
                       else
                         span.badge.bg-primary Đang mượn
                     td
-                      form(action=`/borrow/${borrow._id}/return` method='post' onsubmit="return confirm('Xác nhận trả sách? Hệ thống sẽ chốt phí theo số ngày thực tế.')")
+                      form(action=`/borrow/${borrow._id}/return` method='post' data-confirm='Xác nhận trả sách? Hệ thống sẽ chốt phí theo số ngày thực tế.')
                         button.btn.btn-sm.btn-success(type='submit')
                           i.bi.bi-arrow-return-left.me-1
                           | Trả sách
@@ -105,7 +105,9 @@ block content
                     td= (borrow.dailyRentalFee || (borrow.book && borrow.book.dailyRentalFee) || 5000).toLocaleString('vi-VN') + ' ₫'
                     td= borrow.rentalDays || 1
                     td
-                      strong= (borrow.totalRentalFee || 0).toLocaleString('vi-VN') + ' ₫'\n                      if borrow.lateDays > 0\n                        small.d-block.text-danger= 'Trong đó phụ thu trễ: ' + (borrow.lateFee || 0).toLocaleString('vi-VN') + ' ₫'
+                      strong= (borrow.totalRentalFee || 0).toLocaleString('vi-VN') + ' ₫'
+                      if borrow.lateDays > 0
+                        small.d-block.text-danger= 'Trong đó phụ thu trễ: ' + (borrow.lateFee || 0).toLocaleString('vi-VN') + ' ₫'
                     td= borrow.borrowDate ? new Date(borrow.borrowDate).toLocaleDateString('vi-VN') : '—'
                     td= borrow.returnDate ? new Date(borrow.returnDate).toLocaleDateString('vi-VN') : '—'
                     td

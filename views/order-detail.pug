@@ -1,0 +1,39 @@
+extends layout
+
+block content
+    - const fmtDate = d => new Date(d).toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' })
+    h1 Chi tiết đơn hàng
+    p Mã đơn: #{order._id}
+    p Ngày đặt: #{fmtDate(order.createdAt)}
+    p
+        | Trạng thái:
+        span.badge(class=orderStatus.badge(order.status))= orderStatus.label(order.status)
+    if order.status === 'cancelled' && order.cancelledAt
+        p.text-secondary
+            | Đã hủy lúc #{fmtDate(order.cancelledAt)}
+            if order.cancelledBy === 'admin'
+                |  bởi quản trị viên
+    p Địa chỉ: #{order.address}
+    .table-responsive
+        table.table
+            thead
+                tr
+                    th Sách
+                    th Giá lúc đặt
+                    th Số lượng
+                    th Thành tiền
+            tbody
+                each item in order.items
+                    tr
+                        td= item.title
+                        td #{item.unitPrice.toLocaleString('vi-VN')} đ
+                        td= item.qty
+                        td #{(item.unitPrice * item.qty).toLocaleString('vi-VN')} đ
+    p.fw-bold Tổng tiền: #{order.total.toLocaleString('vi-VN')} đ
+    if order.status === 'pending'
+        p Đơn đang chờ xử lý. Chức năng này chưa thu tiền hoặc trừ tồn kho.
+    .d-flex.flex-wrap.gap-2
+        a.btn.btn-outline-primary(href="/orders") Xem các đơn của tôi
+        if order.status === 'pending'
+            form(method="POST" action='/orders/' + order._id + '/cancel')
+                button.btn.btn-outline-danger(type="submit") Hủy đơn hàng

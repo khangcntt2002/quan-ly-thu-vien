@@ -20,7 +20,11 @@ block content
                         .mb-4
                             label.form-label(for="login-password") Mật khẩu
                             input#login-password.form-control(type="password" name="password" required autocomplete="current-password")
+                        
                         button#login-submit.btn.btn-primary.w-100(type="submit") Đăng nhập
-                    p.text-center.small.mt-4.mb-0
-                        | Chưa có tài khoản? 
+                    
+                    // === ✅ Cùng 1 dòng, từ trái sang: Quên mật khẩu | Đăng ký ===
+                    p.text-center.small.mt-3.mb-0
+                        a(href="/forgot-password") Quên mật khẩu
+                        | &nbsp; || &nbsp;
                         a#login-register(href="/register") Đăng ký

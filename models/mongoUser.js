@@ -8,7 +8,10 @@ const schema = new mongoose.Schema({
     match: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ },
   password: { type: String, required: true, select: false },
   role: { type: String, enum: ['user', 'admin'],
-    default: 'user' }
+    default: 'user' },
+  resetOtpHash: { type: String, select: false },
+  resetOtpExpires: { type: Date, select: false }
+    
 }, { timestamps: true });
  
 schema.pre('save', async function () {

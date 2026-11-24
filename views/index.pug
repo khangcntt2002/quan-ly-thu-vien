@@ -125,7 +125,12 @@ block style
             grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 16px;
         }
+        @media (min-width: 900px) {
+            .home-books { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+        }
         .home-book-card {
+            display: flex;
+            flex-direction: column;
             overflow: hidden;
             text-align: center;
             border-radius: 9px;
@@ -137,25 +142,38 @@ block style
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(93, 64, 55, .14);
         }
+        /* Mọi bìa sách cùng khung 3:4, hiện trọn bìa (không cắt) trên nền be */
         .home-book-image {
             display: block;
             width: 100%;
-            height: clamp(125px, 17vw, 190px);
-            object-fit: cover;
-            background: #eee2d2;
+            box-sizing: border-box;
+            aspect-ratio: 3 / 4;
+            padding: 12px;
+            object-fit: contain;
+            background: #f3e6d3;
         }
         .home-book-info {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            align-items: center;
             padding: 10px 10px 13px;
         }
         .home-book-info h3 {
-            min-height: 34px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            min-height: 2.6em;
             margin: 0 0 4px;
+            line-height: 1.3;
             color: #5d4037;
             font-size: 13px;
             font-weight: 800;
         }
         .home-book-info p {
             margin: 0 0 9px;
+            flex: 1;
             color: #967b69;
             font-size: 11px;
         }

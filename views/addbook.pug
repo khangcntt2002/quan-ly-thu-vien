@@ -7,7 +7,7 @@ block content
             ol.breadcrumb
                 li.breadcrumb-item
                     a(href="/") Trang chủ
-                li.breadcrumb-item.active(aria-current="page") Thêm sách
+                li.breadcrumb-item.active(aria-current="page")= isEdit ? 'Sửa sách' : 'Thêm sách'
 
         header.books-intro
             span.tag Quản lý tủ sách
@@ -57,6 +57,11 @@ block content
                                 maxlength="100"
                                 placeholder="Ví dụ: JavaScript"
                             )
+                        .col-md-6
+                            label.form-label(for="menuCategory") Danh mục
+                            select#menuCategory.form-select(name="menuCategory")
+                                each c in ['Văn học', 'Kinh tế', 'Công nghệ', 'Ngoại ngữ', 'Giáo trình', 'Kỹ năng sống', 'Lịch sử', 'Thiếu nhi']
+                                    option(value=c selected=(formBook.menuCategory || 'Công nghệ') === c)= c
                         .col-md-6
                             label.form-label(for="edition") Phiên bản
                             input#edition.form-control(

@@ -9,9 +9,9 @@ const upload = multer({
     limits: {
         fileSize: 2 * 1024 * 1024, // Tối đa 2 MB mỗi ảnh.
         files: 1, // Mỗi lần gửi form chỉ nhận tối đa một file.
-        fields: 6, // title, author, category, edition, description, url.
+        fields: 12, // title, author, category, menuCategory, edition, description, url, price, dailyRentalFee.
         fieldSize: 32 * 1024, // Mỗi ô chữ tối đa 32 KB.
-        parts: 7 // 6 ô chữ + 1 ảnh.
+        parts: 13 // 12 ô chữ + 1 ảnh.
     },
     fileFilter: (req, file, cb) => {
         // MIME do phía gửi khai báo; Cloudinary kiểm tra ảnh thật ở mục 5.

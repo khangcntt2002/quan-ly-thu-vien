@@ -1,8 +1,4 @@
 const router = require('express').Router();
-const mongoose = require('mongoose');
-const Book = require('../../models/Book');
-const User = require('../../models/mongoUser');
-const { signToken, verifyToken } = require('../../utils/jwt');
 const c = require('../../controller/book.api.controller');
 const { checkAdmin } = require('../../middlewares/auth');
 
@@ -14,7 +10,13 @@ router.get('/', c.list);
 // GET /api/v1/books/:id
 router.get('/:id', c.findid);
 
-// POST /api/v1/books
+// POST /api/v1/books (chỉ admin)
 router.post('/', checkAdmin, c.create);
+
+// PUT /api/v1/books/:id (chỉ admin)
+router.put('/:id', checkAdmin, c.replace);
+
+// DELETE /api/v1/books/:id (chỉ admin)
+router.delete('/:id', checkAdmin, c.remove);
 
 module.exports = router;

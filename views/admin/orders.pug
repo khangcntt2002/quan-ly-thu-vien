@@ -1,0 +1,40 @@
+extends ../layout
+
+block content
+    - const fmtDate = d => new Date(d).toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' })
+    .py-3.py-md-4
+        nav.mb-4(aria-label="Đường dẫn")
+            ol.breadcrumb
+                li.breadcrumb-item
+                    a(href="/admin") Quản trị
+                li.breadcrumb-item.active(aria-current="page") Đơn hàng
+        h1.h3.mb-3 Quản lý đơn hàng
+        if orders.length === 0
+            .alert.alert-info Chưa có đơn hàng nào.
+        else
+            .table-responsive
+                table.table.table-striped.align-middle
+                    thead
+                        tr
+                            th Mã đơn
+                            th Người mua
+                            th Ngày đặt
+                            th.text-end Tổng tiền
+                            th Trạng thái
+                            th
+                    tbody
+                        each order in orders
+                            tr
+                                td= String(order._id)
+                                td
+                                    if order.user
+                                        | #{order.user.name}
+                                        small.text-secondary (#{order.user.email})
+                                    else
+                                        span.text-secondary Tài khoản đã xóa
+                                td= fmtDate(order.createdAt)
+                                td.text-end #{order.total.toLocaleString('vi-VN')} đ
+                                td
+                                    span.badge(class=orderStatus.badge(order.status))= orderStatus.label(order.status)
+                                td
+                                    a.btn.btn-sm.btn-outline-primary(href='/admin/orders/' + order._id) Chi tiết

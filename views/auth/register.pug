@@ -7,25 +7,19 @@ block content
         .col-md-8.col-lg-6
             .card.border-0.shadow-sm.rounded-4
                 .card-body.p-4.p-md-5
+                    p.small.text-secondary.mb-1 Bước 1/2
                     h1.h3.mb-2 Đăng ký tài khoản
-                    p.text-secondary.mb-4 Tạo tài khoản để bắt đầu sử dụng Phuckhang
+                    p.text-secondary.mb-4 Nhập họ tên và email, chúng tôi sẽ gửi mã OTP 6 chữ số để xác thực email.
                     if formError
                         #register-error.alert.alert-danger(role="alert")= formError
                     form#register-form(method="POST" action="/register")
                         .mb-3
                             label.form-label(for="register-name") Họ tên
                             input#register-name.form-control(type="text" name="name" value=values.name required maxlength="80" autocomplete="name")
-                        .mb-3
+                        .mb-4
                             label.form-label(for="register-email") Email
                             input#register-email.form-control(type="email" name="email" value=values.email required autocomplete="email")
-                        .mb-3
-                            label.form-label(for="register-password") Mật khẩu
-                            input#register-password.form-control(type="password" name="password" required minlength="8" autocomplete="new-password" aria-describedby="password-help")
-                            #password-help.form-text Tối thiểu 8 ký tự và tối đa 72 byte UTF-8. Ký tự tiếng Việt có thể chiếm nhiều byte.
-                        .mb-4
-                            label.form-label(for="register-confirm") Nhập lại mật khẩu
-                            input#register-confirm.form-control(type="password" name="confirm" required minlength="8" autocomplete="new-password")
-                        button#register-submit.btn.btn-primary.w-100(type="submit") Đăng ký
+                        button#register-submit.btn.btn-primary.w-100(type="submit") Gửi mã OTP
                     p.text-center.small.mt-4.mb-0
-                        | Đã có tài khoản? 
+                        | Đã có tài khoản?
                         a#register-login(href="/login") Đăng nhập

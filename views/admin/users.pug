@@ -43,7 +43,7 @@ block content
                                     td= account.createdAt ? new Date(account.createdAt).toLocaleDateString('vi-VN') : ''
                                     td.text-end
                                         if account.role !== 'admin'
-                                            form.d-inline(method='POST', action='/admin/users/' + account._id + '/delete', onsubmit="return confirm('Bạn có chắc muốn xóa tài khoản này? Lịch sử mượn của tài khoản cũng sẽ bị xóa.');")
+                                            form.d-inline(method='POST', action='/admin/users/' + account._id + '/delete', data-confirm='Bạn có chắc muốn xóa tài khoản này? Lịch sử mượn của tài khoản cũng sẽ bị xóa.')
                                                 button.btn.btn-sm.btn-outline-danger(type='submit')
                                                     i.bi.bi-trash.me-1
                                                     | Xóa user

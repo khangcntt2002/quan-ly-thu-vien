@@ -28,12 +28,12 @@ module.exports = (req, res, next) => {
         }
         // Route sửa sách(/:id/update) có req.paras.id ->render lại sửa thay vì thêm
         const isEdit = Boolean(req.params && req.params.id);
-        const book = isEdit ? { ...req.body, id:req.params.id} : req.body || {};
+        const book = isEdit ? { ...req.body, _id: req.params.id } : req.body || {};
 
         //render lại form kèm dữ liệu đã nhập(book) và báo lỗi(error)
         //return để k gửi response 2 lần
         return res.status(status).render('addbook', {
-            title: isEdit ? 'sửa sách' : 'Thêm sách',
+            title: isEdit ? 'Sửa sách' : 'Thêm sách',
             isEdit,
             book,
             error: message
